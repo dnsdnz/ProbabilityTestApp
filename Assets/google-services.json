@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "365048301883",
+    "firebase_url": "https://probabilitytestapp-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "probabilitytestapp",
+    "storage_bucket": "probabilitytestapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:365048301883:android:8e8524ae86efe9f3decf1e",
+        "android_client_info": {
+          "package_name": "com.probability"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChKGQXwLk7uNw2a7ZOSrj7qgHG601Lu4Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
