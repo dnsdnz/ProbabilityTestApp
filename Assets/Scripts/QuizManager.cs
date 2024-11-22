@@ -10,6 +10,8 @@ using UnityEngine.UI;
 public class QuizManager : MonoBehaviour
 {
     public GameObject introPanel;
+    public GameObject successPanel;
+
     public TMP_InputField collectorNameInputField; 
     public TMP_InputField childNameInputField;
     public TMP_InputField birthdayInputField;
@@ -153,6 +155,7 @@ public class QuizManager : MonoBehaviour
         if (index >= questionPanels.Count)
         {
             FinishQuiz();
+            successPanel.SetActive(true);
             return;
         }
         
