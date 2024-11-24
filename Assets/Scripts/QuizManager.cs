@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Firebase;
@@ -32,11 +33,12 @@ public class QuizManager : MonoBehaviour
         public GameObject panel;
         public Button correctButton;
         public Button[] allButtons;
+        public AudioClip questionAudio;
     }
 
     public List<QuestionPanel> questionPanels; 
     private int currentPanelIndex = 0;
-    private float questionTimer = 5f; //TODO 90 sn yap
+    private float questionTimer = 90f;
     private bool isAnswered = false;
     private bool isQuestionActive = false;
     private List<int> results = new List<int>(); // correct1-wrong0
@@ -44,9 +46,11 @@ public class QuizManager : MonoBehaviour
     private List<string> questionOpenTimes = new List<string>();
     private List<string> questionAnswerTimes = new List<string>();
     private List<double> responseTimes = new List<double>(); 
-
+    
     private DatabaseReference databaseReference;
     
+    public AudioSource audioSource; 
+
     //Veri toplayan kişi----
     //Uygulama tarihi----
     //Çocuğun adı soyadı---
@@ -145,6 +149,11 @@ public class QuizManager : MonoBehaviour
         ShowPanel(0);
     }
 
+    public void OpenGetEducationTimeInputField()
+    {
+        preEducationTimeInputField.gameObject.SetActive(getPreEducationDropdown.value == 1);
+    }
+
     void ShowPanel(int index)
     {
         foreach (var panel in questionPanels)
@@ -163,16 +172,34 @@ public class QuizManager : MonoBehaviour
         currentPanelIndex = index;
         
         questionOpenTimes.Add(DateTime.Now.ToString("HH:mm:ss"));
-
+        
         foreach (var button in questionPanels[index].allButtons)
         {
-            button.onClick.RemoveAllListeners(); 
+            button.gameObject.SetActive(false);
+            button.onClick.RemoveAllListeners();
             button.onClick.AddListener(() => OnButtonClicked(button));
         }
 
-        questionTimer = 5f;
+        questionTimer = 90f;
         isAnswered = false;
         isQuestionActive = true;
+        
+        if (questionPanels[index].questionAudio != null)
+        {
+            audioSource.clip = questionPanels[index].questionAudio;
+            audioSource.Play();
+
+            StartCoroutine(EnableButtonsAfterAudio(questionPanels[index].allButtons, audioSource.clip.length));
+        }
+    }
+    
+    IEnumerator EnableButtonsAfterAudio(Button[] buttons, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        foreach (var button in buttons)
+        {
+            button.gameObject.SetActive(true);
+        }
     }
     
     void OnButtonClicked(Button clickedButton)
