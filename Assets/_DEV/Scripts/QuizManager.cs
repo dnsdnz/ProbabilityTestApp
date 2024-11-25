@@ -12,23 +12,25 @@ public class QuizManager : MonoBehaviour
 {
     public GameObject introPanel;
     public GameObject successPanel;
-    public GameObject pausePanel; 
-    
+    public GameObject pausePanel;
+
     public TMP_InputField collectorNameInputField;
     public TMP_InputField childNameInputField;
     public TMP_InputField birthdayInputField;
-    public TMP_InputField locationInputField;
-    public TMP_InputField preEducationTimeInputField;
 
     public TMP_Dropdown genderDropdown;
     public TMP_Dropdown motherEducationDropdown;
     public TMP_Dropdown fatherEducationDropdown;
     public TMP_Dropdown siblingCountDropdown;
+    public TMP_Dropdown locationDropdown;
+    public TMP_Dropdown locationDetailDropdown;
     public TMP_Dropdown getPreEducationDropdown;
-
-    public Button startButton;
+    public TMP_Dropdown preEducationTimeDropdown;
     
-    public bool isPaused; 
+    public GameObject preEducationTimeDropdownParent;
+    public Button startButton;
+
+    public bool isPaused;
 
     [Serializable]
     public class QuestionPanel
@@ -44,7 +46,7 @@ public class QuizManager : MonoBehaviour
     public float questionTimer = 90f;
     public bool isAnswered = false;
     public bool isQuestionActive = false;
-    
+
     public List<int> results = new List<int>(); // correct1-wrong0
     public List<string> questionOpenTimes = new List<string>();
     public List<string> questionAnswerTimes = new List<string>();
@@ -81,6 +83,7 @@ public class QuizManager : MonoBehaviour
     private string fatherEducation;
     private string siblingCount;
     private string location;
+    private string locationDetail;
     private string getEducationBefore;
     private string preEducationTime;
     private string appStartTime;
@@ -89,7 +92,7 @@ public class QuizManager : MonoBehaviour
     private int completeScore;
 
     public DateTime appStartDateTime;
-    
+
     public float pauseStartTime;
     public float totalPauseTime;
     public float questionStartTime;
@@ -135,13 +138,13 @@ public class QuizManager : MonoBehaviour
             questionTimer -= Time.deltaTime;
             if (questionTimer <= 0)
             {
-                questionTimer = 0; 
-                RegisterAnswer(false); 
+                questionTimer = 0;
+                RegisterAnswer(false);
                 ShowPanel(currentPanelIndex + 1);
             }
         }
     }
-    
+
     public void PauseGame()
     {
         isPaused = true;
@@ -159,44 +162,45 @@ public class QuizManager : MonoBehaviour
     void OnStartButtonClicked()
     {
         //TODO OPEN CODES!!
-        // if (string.IsNullOrEmpty(collectorNameInputField.text) || string.IsNullOrEmpty(childNameInputField.text) ||
-        //     string.IsNullOrEmpty(birthdayInputField.text)
-        //     || string.IsNullOrEmpty(locationInputField.text) || genderDropdown.value == 0 ||
-        //     motherEducationDropdown.value == 0 || fatherEducationDropdown.value == 0 ||
-        //     siblingCountDropdown.value == 0 || getPreEducationDropdown.value == 0)
-        // {
-        //     Debug.Log("Eksik bilgileri doldur!");
-        //     return;
-        // }
-        //
-        // if (getPreEducationDropdown.value == 1)
-        // {
-        //     if (string.IsNullOrEmpty(preEducationTimeInputField.text))
-        //     {
-        //         Debug.Log("Eksik bilgileri doldur!");
-        //         return;
-        //     }
-        // }
+        if (string.IsNullOrEmpty(collectorNameInputField.text) || string.IsNullOrEmpty(childNameInputField.text) ||
+            string.IsNullOrEmpty(birthdayInputField.text) || genderDropdown.value == 0 ||
+            motherEducationDropdown.value == 0 || fatherEducationDropdown.value == 0 ||
+            siblingCountDropdown.value == 0 || locationDropdown.value == 0
+            || locationDetailDropdown.value == 0 || getPreEducationDropdown.value == 0)
+        {
+            Debug.Log("Eksik bilgileri doldur!");
+            return;
+        }
+
+        if (getPreEducationDropdown.value == 1)
+        {
+            if (preEducationTimeDropdown.value == 0)
+            {
+                Debug.Log("Eksik bilgileri doldur!");
+                return;
+            }
+        }
 
         collectorName = collectorNameInputField.text;
         childName = childNameInputField.text;
         birthday = birthdayInputField.text;
-        location = locationInputField.text;
-        preEducationTime = preEducationTimeInputField.text;
 
         gender = genderDropdown.options[genderDropdown.value].text;
         motherEducation = motherEducationDropdown.options[motherEducationDropdown.value].text;
         fatherEducation = fatherEducationDropdown.options[fatherEducationDropdown.value].text;
         siblingCount = siblingCountDropdown.options[siblingCountDropdown.value].text;
+        location = locationDropdown.options[locationDetailDropdown.value].text;
+        locationDetail = locationDetailDropdown.options[locationDetailDropdown.value].text;
         getEducationBefore = getPreEducationDropdown.options[getPreEducationDropdown.value].text;
-
+        preEducationTime = preEducationTimeDropdown.options[preEducationTimeDropdown.value].text;
+        
         introPanel.SetActive(false);
         ShowPanel(0);
     }
 
     public void OpenGetEducationTimeInputField()
     {
-        preEducationTimeInputField.gameObject.SetActive(getPreEducationDropdown.value == 1);
+        preEducationTimeDropdownParent.SetActive(getPreEducationDropdown.value == 1);
     }
 
     void ShowPanel(int index)
@@ -255,7 +259,7 @@ public class QuizManager : MonoBehaviour
         bool isCorrect = clickedButton == questionPanels[currentPanelIndex].correctButton;
         RegisterAnswer(isCorrect);
     }
-    
+
     void RegisterAnswer(bool isCorrect)
     {
         isAnswered = true;
@@ -296,7 +300,7 @@ public class QuizManager : MonoBehaviour
         // }
 
         WriteData(collectorName, appStartDay, childName, birthday, gender, motherEducation, fatherEducation,
-            siblingCount, location, getEducationBefore, preEducationTime, appStartTime, appEndTime, fullSessionTime,
+            siblingCount, location, locationDetail, getEducationBefore, preEducationTime, appStartTime, appEndTime, fullSessionTime,
             completeScore,
             results[0], results[1],
             results[0] + results[1],
@@ -305,32 +309,33 @@ public class QuizManager : MonoBehaviour
 
     void WriteData(string collectorName, string appStartDay, string childName, string birthday, string gender,
         string motherEducation, string fatherEducation,
-        string siblingCount, string location, string getEducationBefore, string preEducationTime, string appStartTime,
+        string siblingCount, string location, string locationDetail, string getEducationBefore, string preEducationTime, string appStartTime,
         string appEndTime, double fullSessionTime,
         int completeScore, int q1Score, int q2Score, int chapter1Score, double q1responseTime, double q2responseTime)
     {
         var userData = new Dictionary<string, object>
         {
-            { "VeriToplayanKişi", collectorName },
-            { "UygulamaTarihi", appStartDay },
-            { "ÇocuğunAdıSoyadı", childName },
-            { "ÇocuğunDoğumTarihi", birthday },
-            { "ÇocuğunCinsiyeti", gender },
-            { "AnneÖğrenimDurumu", motherEducation },
-            { "BabaÖğrenimDurumu", fatherEducation },
-            { "KardeşSayısı", siblingCount },
-            { "ÇocuğunYaşadığıİlİlçeKöy", location },
-            { "DahaÖnceOkulÖncesiEğitimiAldımı", getEducationBefore },
-            { "DahaÖnceOkulÖncesiEğitimiAlmaSüresi", preEducationTime },
-            { "UygulamaBaşlamaZamanı", appStartTime },
-            { "UygulamaBitişZamanı", appEndTime },
-            { "ToplamOturumSüresi", fullSessionTime },
-            { "TESTİNTAMAMINDANALINANTOPLAMPUAN", completeScore },
-            { "1SorununPuanı", q1Score },
-            { "2SorununPuanı", q2Score },
-            { "1BÖLÜMTOPLAMPUANI", chapter1Score },
-            { "1SorununTepkiSüresi", q1responseTime },
-            { "2SorununTepkiSüresi", q2responseTime },
+            { "A1_VeriToplayanKişi", collectorName },
+            { "A2_UygulamaTarihi", appStartDay },
+            { "A3_ÇocuğunAdıSoyadı", childName },
+            { "A4_ÇocuğunDoğumTarihi", birthday },
+            { "A5_ÇocuğunCinsiyeti", gender },
+            { "A6_AnneÖğrenimDurumu", motherEducation },
+            { "A7_BabaÖğrenimDurumu", fatherEducation },
+            { "A8_KardeşSayısı", siblingCount },
+            { "A9_ÇocuğunYaşadığıİl", location },
+            { "B1_ÇocuğunYaşadığıİlİlçeKöy", locationDetail },
+            { "B2_DahaÖnceOkulÖncesiEğitimiAldımı", getEducationBefore },
+            { "B3_DahaÖnceOkulÖncesiEğitimiAlmaSüresi", preEducationTime },
+            { "C_UygulamaBaşlamaZamanı", appStartTime },
+            { "C_UygulamaBitişZamanı", appEndTime },
+            { "D_ToplamOturumSüresi", fullSessionTime },
+            { "E_TESTİNTAMAMINDANALINANTOPLAMPUAN", completeScore },
+            { "F_1SorununPuanı", q1Score },
+            { "F_2SorununPuanı", q2Score },
+            { "G_1BÖLÜMTOPLAMPUANI", chapter1Score },
+            { "H_1SorununTepkiSüresi", q1responseTime },
+            { "H_2SorununTepkiSüresi", q2responseTime },
         };
 
         databaseReference
