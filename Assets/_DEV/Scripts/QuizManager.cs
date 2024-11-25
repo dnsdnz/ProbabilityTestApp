@@ -12,7 +12,8 @@ public class QuizManager : MonoBehaviour
 {
     public GameObject introPanel;
     public GameObject successPanel;
-
+    public GameObject pausePanel; 
+    
     public TMP_InputField collectorNameInputField;
     public TMP_InputField childNameInputField;
     public TMP_InputField birthdayInputField;
@@ -26,6 +27,8 @@ public class QuizManager : MonoBehaviour
     public TMP_Dropdown getPreEducationDropdown;
 
     public Button startButton;
+    
+    public bool isPaused; 
 
     [Serializable]
     public class QuestionPanel
@@ -37,15 +40,15 @@ public class QuizManager : MonoBehaviour
     }
 
     public List<QuestionPanel> questionPanels;
-    private int currentPanelIndex = 0;
-    private float questionTimer = 90f;
-    private bool isAnswered = false;
-    private bool isQuestionActive = false;
-    private List<int> results = new List<int>(); // correct1-wrong0
-
-    private List<string> questionOpenTimes = new List<string>();
-    private List<string> questionAnswerTimes = new List<string>();
-    private List<double> responseTimes = new List<double>();
+    public int currentPanelIndex = 0;
+    public float questionTimer = 90f;
+    public bool isAnswered = false;
+    public bool isQuestionActive = false;
+    
+    public List<int> results = new List<int>(); // correct1-wrong0
+    public List<string> questionOpenTimes = new List<string>();
+    public List<string> questionAnswerTimes = new List<string>();
+    public List<double> responseTimes = new List<double>();
 
     private DatabaseReference databaseReference;
 
@@ -85,12 +88,15 @@ public class QuizManager : MonoBehaviour
     private double fullSessionTime;
     private int completeScore;
 
-    private DateTime appStartDateTime;
+    public DateTime appStartDateTime;
+    
+    public float pauseStartTime;
+    public float totalPauseTime;
+    public float questionStartTime;
 
     void Start()
     {
         completeScore = 0;
-
         appStartDay = DateTime.Now.ToString("yyyy-MM-dd");
         appStartTime = DateTime.Now.ToString("HH:mm:ss");
         appStartDateTime = DateTime.Now;
@@ -121,36 +127,56 @@ public class QuizManager : MonoBehaviour
 
     void Update()
     {
+        if (isPaused)
+            return;
+
         if (isQuestionActive && !isAnswered)
         {
             questionTimer -= Time.deltaTime;
             if (questionTimer <= 0)
             {
-                RegisterAnswer(false);
+                questionTimer = 0; 
+                RegisterAnswer(false); 
+                ShowPanel(currentPanelIndex + 1);
             }
         }
+    }
+    
+    public void PauseGame()
+    {
+        isPaused = true;
+        pausePanel.SetActive(true);
+        pauseStartTime = Time.time;
+    }
+
+    public void ResumeGame()
+    {
+        isPaused = false;
+        pausePanel.SetActive(false);
+        totalPauseTime += Time.time - pauseStartTime;
     }
 
     void OnStartButtonClicked()
     {
-        if (string.IsNullOrEmpty(collectorNameInputField.text) || string.IsNullOrEmpty(childNameInputField.text) ||
-            string.IsNullOrEmpty(birthdayInputField.text)
-            || string.IsNullOrEmpty(locationInputField.text) || genderDropdown.value == 0 ||
-            motherEducationDropdown.value == 0 || fatherEducationDropdown.value == 0 ||
-            siblingCountDropdown.value == 0 || getPreEducationDropdown.value == 0)
-        {
-            Debug.Log("Eksik bilgileri doldur!");
-            return;
-        }
-
-        if (getPreEducationDropdown.value == 1)
-        {
-            if (string.IsNullOrEmpty(preEducationTimeInputField.text))
-            {
-                Debug.Log("Eksik bilgileri doldur!");
-                return;
-            }
-        }
+        //TODO OPEN CODES!!
+        // if (string.IsNullOrEmpty(collectorNameInputField.text) || string.IsNullOrEmpty(childNameInputField.text) ||
+        //     string.IsNullOrEmpty(birthdayInputField.text)
+        //     || string.IsNullOrEmpty(locationInputField.text) || genderDropdown.value == 0 ||
+        //     motherEducationDropdown.value == 0 || fatherEducationDropdown.value == 0 ||
+        //     siblingCountDropdown.value == 0 || getPreEducationDropdown.value == 0)
+        // {
+        //     Debug.Log("Eksik bilgileri doldur!");
+        //     return;
+        // }
+        //
+        // if (getPreEducationDropdown.value == 1)
+        // {
+        //     if (string.IsNullOrEmpty(preEducationTimeInputField.text))
+        //     {
+        //         Debug.Log("Eksik bilgileri doldur!");
+        //         return;
+        //     }
+        // }
 
         collectorName = collectorNameInputField.text;
         childName = childNameInputField.text;
@@ -194,12 +220,15 @@ public class QuizManager : MonoBehaviour
 
         foreach (var button in questionPanels[index].allButtons)
         {
-            button.gameObject.SetActive(false);
+            //button.gameObject.SetActive(false);
             button.onClick.RemoveAllListeners();
             button.onClick.AddListener(() => OnButtonClicked(button));
         }
 
         questionTimer = 90f;
+        questionStartTime = Time.time;
+        totalPauseTime = 0f;
+
         isAnswered = false;
         isQuestionActive = true;
 
@@ -208,7 +237,7 @@ public class QuizManager : MonoBehaviour
             audioSource.clip = questionPanels[index].questionAudio;
             audioSource.Play();
 
-            StartCoroutine(EnableButtonsAfterAudio(questionPanels[index].allButtons, audioSource.clip.length));
+            //StartCoroutine(EnableButtonsAfterAudio(questionPanels[index].allButtons, audioSource.clip.length));
         }
     }
 
@@ -226,14 +255,21 @@ public class QuizManager : MonoBehaviour
         bool isCorrect = clickedButton == questionPanels[currentPanelIndex].correctButton;
         RegisterAnswer(isCorrect);
     }
-
+    
     void RegisterAnswer(bool isCorrect)
     {
         isAnswered = true;
         isQuestionActive = false;
+
+        float responseTime = Time.time - questionStartTime - totalPauseTime;
+        Debug.Log($"Cevap süresi: {responseTime} saniye");
+
         results.Add(isCorrect ? 1 : 0);
         completeScore += isCorrect ? 1 : 0;
+
         questionAnswerTimes.Add(DateTime.Now.ToString("HH:mm:ss"));
+        responseTimes.Add(responseTime);
+
         ShowPanel(currentPanelIndex + 1);
     }
 
@@ -248,16 +284,16 @@ public class QuizManager : MonoBehaviour
         // Debug.Log(TimeSpan.FromSeconds(numOfSecs).Minutes);
         // Debug.Log(TimeSpan.FromSeconds(numOfSecs).Seconds); 
 
-        int count = Mathf.Min(questionOpenTimes.Count, questionAnswerTimes.Count);
-        for (int i = 0; i < count; i++)
-        {
-            DateTime time1 = DateTime.Parse(questionOpenTimes[i]);
-            DateTime time2 = DateTime.Parse(questionAnswerTimes[i]);
-
-            TimeSpan difference = time2 - time1;
-
-            responseTimes.Add(difference.TotalMilliseconds);
-        }
+        // int count = Mathf.Min(questionOpenTimes.Count, questionAnswerTimes.Count);
+        // for (int i = 0; i < count; i++)
+        // {
+        //     DateTime time1 = DateTime.Parse(questionOpenTimes[i]);
+        //     DateTime time2 = DateTime.Parse(questionAnswerTimes[i]);
+        //
+        //     TimeSpan difference = time2 - time1;
+        //
+        //     responseTimes.Add(difference.TotalMilliseconds);
+        // }
 
         WriteData(collectorName, appStartDay, childName, birthday, gender, motherEducation, fatherEducation,
             siblingCount, location, getEducationBefore, preEducationTime, appStartTime, appEndTime, fullSessionTime,
