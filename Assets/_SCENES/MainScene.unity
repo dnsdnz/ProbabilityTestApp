@@ -35586,7 +35586,7 @@ MonoBehaviour:
     questionAudio: {fileID: 8300000, guid: 0b389380c1a78405cb81057fcd9621e9, type: 3}
     chapterNo: 1
   - panel: {fileID: 2081520626}
-    correctButton: {fileID: 271110067}
+    correctButton: {fileID: 1835134258}
     allButtons:
     - {fileID: 1704580729}
     - {fileID: 1298889091}
@@ -35601,7 +35601,7 @@ MonoBehaviour:
     - {fileID: 1818297721}
     - {fileID: 1467979754}
     - {fileID: 806131630}
-    questionAudio: {fileID: 8300000, guid: 95717c588016c4959975967c76a06cb2, type: 3}
+    questionAudio: {fileID: 8300000, guid: 1e32577454c1349b1a72d113c45b5393, type: 3}
     chapterNo: 1
   - panel: {fileID: 1153359937}
     correctButton: {fileID: 163885352}
@@ -35610,7 +35610,7 @@ MonoBehaviour:
     - {fileID: 67540540}
     - {fileID: 1208065808}
     - {fileID: 163885352}
-    questionAudio: {fileID: 8300000, guid: 95717c588016c4959975967c76a06cb2, type: 3}
+    questionAudio: {fileID: 8300000, guid: 4e090eccd0f1d41fcb5bf260566811d2, type: 3}
     chapterNo: 1
   - panel: {fileID: 1677300493}
     correctButton: {fileID: 451023121}
@@ -35619,7 +35619,7 @@ MonoBehaviour:
     - {fileID: 202990836}
     - {fileID: 105447312}
     - {fileID: 451023121}
-    questionAudio: {fileID: 8300000, guid: 95717c588016c4959975967c76a06cb2, type: 3}
+    questionAudio: {fileID: 8300000, guid: 334f7f0c2dafb41ab8bb903165f46a02, type: 3}
     chapterNo: 1
   - panel: {fileID: 403515860}
     correctButton: {fileID: 1105336871}
@@ -35628,7 +35628,7 @@ MonoBehaviour:
     - {fileID: 1020450573}
     - {fileID: 1105336871}
     - {fileID: 862946796}
-    questionAudio: {fileID: 8300000, guid: 95717c588016c4959975967c76a06cb2, type: 3}
+    questionAudio: {fileID: 8300000, guid: 1e32577454c1349b1a72d113c45b5393, type: 3}
     chapterNo: 1
   - panel: {fileID: 217466455}
     correctButton: {fileID: 1290011565}
@@ -35646,7 +35646,7 @@ MonoBehaviour:
     - {fileID: 1595603426}
     - {fileID: 995127524}
     - {fileID: 1403868610}
-    questionAudio: {fileID: 8300000, guid: 95717c588016c4959975967c76a06cb2, type: 3}
+    questionAudio: {fileID: 8300000, guid: df9472f6ac8754082b6f28ad825ce686, type: 3}
     chapterNo: 1
   currentPanelIndex: 0
   questionTimer: 90
