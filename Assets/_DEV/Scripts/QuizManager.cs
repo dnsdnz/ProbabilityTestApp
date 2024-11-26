@@ -39,6 +39,7 @@ public class QuizManager : MonoBehaviour
         public Button correctButton;
         public Button[] allButtons;
         public AudioClip questionAudio;
+        public int chapterNo;
     }
 
     public List<QuestionPanel> questionPanels;
@@ -56,24 +57,6 @@ public class QuizManager : MonoBehaviour
 
     public AudioSource audioSource;
     public AudioSource nextPageAudioSource;
-
-    //Veri toplayan kişi----
-    //Uygulama tarihi----
-    //Çocuğun adı soyadı---
-    //Çocuğun Doğum Tarihi----
-    //Çocuğun cinsiyeti---
-    //Anne öğrenim durumu---
-    //Baba öğrenim durumu----
-    //Kardeş sayısı---
-    //Çocuğun yaşadığı il/ilçe/köy---
-    //Daha önce okul öncesi eğitimi aldı mı---
-    //Daha önce okul öncesi eğitimi alma süresi---
-    //Uygulama başlama zamanı---
-    //Uygulama bitiş zamanı---
-    //Toplam oturum süresi---
-    //TESTİN TAMAMINDAN ALINAN TOPLAM PUAN
-    //1... sorunun puanı
-    //1... BÖLÜM TOPLAM PUANI
 
     private string collectorName;
     private string appStartDay;
@@ -223,13 +206,25 @@ public class QuizManager : MonoBehaviour
 
         questionOpenTimes.Add(DateTime.Now.ToString("HH:mm:ss"));
 
-        foreach (var button in questionPanels[index].allButtons)
+        if (questionPanels[index].chapterNo == 2)
         {
-            //button.gameObject.SetActive(false);
-            button.onClick.RemoveAllListeners();
-            button.onClick.AddListener(() => OnButtonClicked(button));
+            foreach (var button in questionPanels[index].allButtons)
+            {
+                button.gameObject.SetActive(false);
+                button.onClick.RemoveAllListeners();
+                button.onClick.AddListener(() => OnButtonClicked(button));
+            }
         }
-
+        else
+        {
+            foreach (var button in questionPanels[index].allButtons)
+            {
+                button.interactable = false;
+                button.onClick.RemoveAllListeners();
+                button.onClick.AddListener(() => OnButtonClicked(button));
+            }
+        }
+        
         questionTimer = 90f;
         questionStartTime = Time.time;
         totalPauseTime = 0f;
@@ -242,7 +237,14 @@ public class QuizManager : MonoBehaviour
             audioSource.clip = questionPanels[index].questionAudio;
             audioSource.Play();
 
-            //StartCoroutine(EnableButtonsAfterAudio(questionPanels[index].allButtons, audioSource.clip.length));
+            if (questionPanels[index].chapterNo == 2)
+            {
+                StartCoroutine(EnableButtonsAfterAudio(questionPanels[index].allButtons, audioSource.clip.length));
+            }
+            else
+            {
+                StartCoroutine(ActivateButtonsAfterAudio(questionPanels[index].allButtons, audioSource.clip.length));
+            }
         }
     }
 
@@ -252,6 +254,15 @@ public class QuizManager : MonoBehaviour
         foreach (var button in buttons)
         {
             button.gameObject.SetActive(true);
+        }
+    }
+    
+    IEnumerator ActivateButtonsAfterAudio(Button[] buttons, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        foreach (var button in buttons)
+        {
+            button.interactable = true;
         }
     }
 
@@ -308,18 +319,24 @@ public class QuizManager : MonoBehaviour
         // }
 
         WriteData(collectorName, appStartDay, childName, birthday, gender, motherEducation, fatherEducation,
-            siblingCount, location, locationDetail, getEducationBefore, preEducationTime, appStartTime, appEndTime, fullSessionTime,
-            completeScore,
-            results[0], results[1],
-            results[0] + results[1],
-            responseTimes[0], responseTimes[1],responseTimes[0]+responseTimes[1]);
+            siblingCount, location, locationDetail, getEducationBefore, preEducationTime, appStartTime, appEndTime,
+            fullSessionTime, completeScore, results[0], results[1], results[2], results[3], 
+            results[4], results[5], results[6], results[7],
+            results[0] + results[1] + results[2] + results[3] + results[4] + results[5] + results[6] + results[7],
+            responseTimes[0], responseTimes[1], responseTimes[2],
+            responseTimes[3], responseTimes[4], responseTimes[5], responseTimes[6],
+            responseTimes[7],
+            responseTimes[0] + responseTimes[1] + responseTimes[2] + responseTimes[3] + responseTimes[4] +
+            responseTimes[5] + responseTimes[6] + responseTimes[7]);
     }
 
     void WriteData(string collectorName, string appStartDay, string childName, string birthday, string gender,
         string motherEducation, string fatherEducation,
         string siblingCount, string location, string locationDetail, string getEducationBefore, string preEducationTime, string appStartTime,
         string appEndTime, double fullSessionTime,
-        int completeScore, int q1Score, int q2Score, int chapter1Score, double q1responseTime, double q2responseTime, double chapter1responseTime)
+        int completeScore, int q1Score, int q2Score, int q3Score, int q4Score, int q5Score,int q6Score, int q7Score, int q8Score, 
+        int chapter1Score, double q1responseTime, double q2responseTime, double q3responseTime, double q4responseTime, double q5responseTime,
+        double q6responseTime,  double q7responseTime,  double q8responseTime, double chapter1responseTime)
     {
         var userData = new Dictionary<string, object>
         {
@@ -341,12 +358,12 @@ public class QuizManager : MonoBehaviour
             { "B5_TESTİNTAMAMINDANALINANTOPLAMPUAN", completeScore },
             { "B6_1SorununPuanı", q1Score },
             { "B7_2SorununPuanı", q2Score },
-            { "B8_3SorununPuanı", q2Score },
-            { "B9_4SorununPuanı", q2Score },
-            { "C0_5SorununPuanı", q2Score },
-            { "C1_6SorununPuanı", q2Score },
-            { "C2_7SorununPuanı", q2Score },
-            { "C3_8SorununPuanı", q2Score },
+            { "B8_3SorununPuanı", q3Score },
+            { "B9_4SorununPuanı", q4Score },
+            { "C0_5SorununPuanı", q5Score },
+            { "C1_6SorununPuanı", q6Score },
+            { "C2_7SorununPuanı", q7Score },
+            { "C3_8SorununPuanı", q8Score },
             { "C4_9SorununPuanı", q2Score },
             { "C5_10SorununPuanı", q2Score },
             { "C6_11SorununPuanı", q2Score },
@@ -366,12 +383,12 @@ public class QuizManager : MonoBehaviour
             { "E0_1BÖLÜMTOPLAMPUANI", chapter1Score },
             { "E1_1SorununTepkiSüresi", q1responseTime },
             { "E2_2SorununTepkiSüresi", q2responseTime },
-            { "E3_3SorununTepkiSüresi", q1responseTime },
-            { "E4_4SorununTepkiSüresi", q2responseTime },
-            { "E5_5SorununTepkiSüresi", q1responseTime },
-            { "E6_6SorununTepkiSüresi", q2responseTime },
-            { "E7_7SorununTepkiSüresi", q1responseTime },
-            { "E8_8SorununTepkiSüresi", q2responseTime },
+            { "E3_3SorununTepkiSüresi", q3responseTime },
+            { "E4_4SorununTepkiSüresi", q4responseTime },
+            { "E5_5SorununTepkiSüresi", q5responseTime },
+            { "E6_6SorununTepkiSüresi", q6responseTime },
+            { "E7_7SorununTepkiSüresi", q7responseTime },
+            { "E8_8SorununTepkiSüresi", q8responseTime },
             { "E9_9SorununTepkiSüresi", q1responseTime },
             { "F0_10SorununTepkiSüresi", q2responseTime },
             { "F1_11SorununTepkiSüresi", q1responseTime },
