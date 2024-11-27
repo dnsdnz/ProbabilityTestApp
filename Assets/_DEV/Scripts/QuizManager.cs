@@ -142,7 +142,12 @@ public class QuizManager : MonoBehaviour
         pausePanel.SetActive(false);
         totalPauseTime += Time.time - pauseStartTime;
     }
-
+    
+    public void ExitGame()
+    {
+       Application.Quit();
+    }
+    
     void OnStartButtonClicked()
     {
         //TODO OPEN CODES!!
@@ -268,6 +273,11 @@ public class QuizManager : MonoBehaviour
 
     void OnButtonClicked(Button clickedButton)
     {
+        foreach (var button in questionPanels[currentPanelIndex].allButtons)
+        {
+            button.interactable = false;
+        }
+
         bool isCorrect = clickedButton == questionPanels[currentPanelIndex].correctButton;
         RegisterAnswer(isCorrect);
     }
@@ -285,9 +295,9 @@ public class QuizManager : MonoBehaviour
 
         questionAnswerTimes.Add(DateTime.Now.ToString("HH:mm:ss"));
         responseTimes.Add(responseTime);
-        
+
         nextPageAudioSource.Play();
-        StartCoroutine(ShowPanelAfterDelay(currentPanelIndex + 1,1));
+        StartCoroutine(ShowPanelAfterDelay(currentPanelIndex + 1,2));
     }
     
     IEnumerator ShowPanelAfterDelay(int index, float delay)
@@ -302,21 +312,6 @@ public class QuizManager : MonoBehaviour
 
         appEndTime = DateTime.Now.ToString("HH:mm:ss");
         fullSessionTime = (DateTime.Now - appStartDateTime).TotalSeconds;
-
-        // Debug.Log(TimeSpan.FromSeconds(numOfSecs).Hours); 
-        // Debug.Log(TimeSpan.FromSeconds(numOfSecs).Minutes);
-        // Debug.Log(TimeSpan.FromSeconds(numOfSecs).Seconds); 
-
-        // int count = Mathf.Min(questionOpenTimes.Count, questionAnswerTimes.Count);
-        // for (int i = 0; i < count; i++)
-        // {
-        //     DateTime time1 = DateTime.Parse(questionOpenTimes[i]);
-        //     DateTime time2 = DateTime.Parse(questionAnswerTimes[i]);
-        //
-        //     TimeSpan difference = time2 - time1;
-        //
-        //     responseTimes.Add(difference.TotalMilliseconds);
-        // }
 
         WriteData(collectorName, appStartDay, childName, birthday, gender, motherEducation, fatherEducation,
             siblingCount, location, locationDetail, getEducationBefore, preEducationTime, appStartTime, appEndTime,

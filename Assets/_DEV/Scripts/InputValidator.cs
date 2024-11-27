@@ -8,11 +8,9 @@ public class InputValidator : TMP_InputValidator
     {
         if (char.IsDigit(ch) || ch == '-' || ch == '.' || ch == ',' || ch == '/')
         {
-            text = text.Insert(pos, ch.ToString());
-            pos++;
-            return ch;
+            return ch; 
         }
 
-        return '\0';
+        return '\0'; 
     }
 }
