@@ -49,7 +49,7 @@ public class QuizManager : MonoBehaviour
     public bool isQuestionActive = false;
 
     public List<int> results = new List<int>(); // correct1-wrong0
-    public List<string> questionOpenTimes = new List<string>();
+    //public List<string> questionOpenTimes = new List<string>();
     public List<string> questionAnswerTimes = new List<string>();
     public List<double> responseTimes = new List<double>();
 
@@ -80,7 +80,8 @@ public class QuizManager : MonoBehaviour
     public float pauseStartTime;
     public float totalPauseTime;
     public float questionStartTime;
-
+    public float remainingAudioTime; 
+    
     void Start()
     {
         completeScore = 0;
@@ -134,6 +135,12 @@ public class QuizManager : MonoBehaviour
         isPaused = true;
         pausePanel.SetActive(true);
         pauseStartTime = Time.time;
+
+        if (audioSource.isPlaying)
+        {
+            remainingAudioTime = audioSource.clip.length - audioSource.time; 
+            audioSource.Pause(); 
+        }
     }
 
     public void ResumeGame()
@@ -141,6 +148,11 @@ public class QuizManager : MonoBehaviour
         isPaused = false;
         pausePanel.SetActive(false);
         totalPauseTime += Time.time - pauseStartTime;
+        
+        if (remainingAudioTime > 0 && audioSource.clip != null)
+        {
+            audioSource.UnPause(); 
+        }
     }
     
     public void ExitGame()
@@ -209,7 +221,7 @@ public class QuizManager : MonoBehaviour
         questionPanels[index].panel.SetActive(true);
         currentPanelIndex = index;
 
-        questionOpenTimes.Add(DateTime.Now.ToString("HH:mm:ss"));
+        //questionOpenTimes.Add(DateTime.Now.ToString("HH:mm:ss"));
 
         if (questionPanels[index].chapterNo == 2)
         {
@@ -253,18 +265,42 @@ public class QuizManager : MonoBehaviour
         }
     }
 
-    IEnumerator EnableButtonsAfterAudio(Button[] buttons, float delay)
+    IEnumerator EnableButtonsAfterAudio(Button[] buttons, float audioLength)
     {
-        yield return new WaitForSeconds(delay);
+        float startTime = Time.time; 
+        float adjustedAudioLength = audioLength; 
+
+        while (adjustedAudioLength > 0)
+        {
+            yield return null;
+
+            if (!isPaused)
+            {
+                adjustedAudioLength -= Time.deltaTime; 
+            }
+        }
+
         foreach (var button in buttons)
         {
             button.gameObject.SetActive(true);
         }
     }
     
-    IEnumerator ActivateButtonsAfterAudio(Button[] buttons, float delay)
+    IEnumerator ActivateButtonsAfterAudio(Button[] buttons, float audioLength)
     {
-        yield return new WaitForSeconds(delay);
+        float startTime = Time.time; 
+        float adjustedAudioLength = audioLength; 
+
+        while (adjustedAudioLength > 0)
+        {
+            yield return null;
+
+            if (!isPaused)
+            {
+                adjustedAudioLength -= Time.deltaTime; 
+            }
+        }
+        
         foreach (var button in buttons)
         {
             button.interactable = true;
@@ -294,7 +330,7 @@ public class QuizManager : MonoBehaviour
         completeScore += isCorrect ? 1 : 0;
 
         questionAnswerTimes.Add(DateTime.Now.ToString("HH:mm:ss"));
-        responseTimes.Add(responseTime);
+        responseTimes.Add(responseTime * 1000);
 
         nextPageAudioSource.Play();
         StartCoroutine(ShowPanelAfterDelay(currentPanelIndex + 1,2));
