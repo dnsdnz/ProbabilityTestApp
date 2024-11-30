@@ -267,7 +267,6 @@ public class QuizManager : MonoBehaviour
 
     IEnumerator EnableButtonsAfterAudio(Button[] buttons, float audioLength)
     {
-        float startTime = Time.time;
         float adjustedAudioLength = audioLength;
 
         while (adjustedAudioLength > 0)
@@ -359,6 +358,18 @@ public class QuizManager : MonoBehaviour
         {
             chapter1ResponseTime += responseTimes[i];
         }
+        
+        var chapter2Score = 0;
+        for (int i = 24; i < 30; i++)
+        {
+            chapter2Score += results[i];
+        }
+
+        var chapter2ResponseTime = 0.0;
+        for (int i = 24; i < 30; i++)
+        {
+            chapter2ResponseTime += responseTimes[i];
+        }
 
         WriteData(collectorName, appStartDay, childName, birthday, gender, motherEducation, fatherEducation, siblingCount, location, 
             locationDetail, getEducationBefore, preEducationTime, appStartTime, appEndTime, fullSessionTime, completeScore,
@@ -367,13 +378,17 @@ public class QuizManager : MonoBehaviour
             results[12], results[13], results[14], results[15], results[16], results[17], 
             results[18], results[19], results[20], results[21], results[22], results[23],
             chapter1Score,
+            results[24], results[25], results[26], results[27], results[28], results[29], 
+            chapter2Score,
             responseTimes[0], responseTimes[1], responseTimes[2], responseTimes[3],
             responseTimes[4], responseTimes[5], responseTimes[6], responseTimes[7],
             responseTimes[8], responseTimes[9], responseTimes[10], responseTimes[11],
             responseTimes[12], responseTimes[13], responseTimes[14], responseTimes[15],
             responseTimes[16], responseTimes[17], responseTimes[18], responseTimes[19],
             responseTimes[20], responseTimes[21], responseTimes[22], responseTimes[23],
-            chapter1ResponseTime);
+            chapter1ResponseTime,
+            responseTimes[24], responseTimes[25], responseTimes[26], responseTimes[27], 
+            responseTimes[28], responseTimes[29], chapter2ResponseTime);
     }
 
     void WriteData(string collectorName, string appStartDay, string childName, string birthday, string gender, string motherEducation,
@@ -382,12 +397,14 @@ public class QuizManager : MonoBehaviour
         int q1Score, int q2Score, int q3Score, int q4Score, int q5Score, int q6Score, int q7Score, int q8Score, int q9Score,
         int q10Score, int q11Score, int q12Score, int q13Score, int q14Score, int q15Score, int q16Score, int q17Score, 
         int q18Score, int q19Score, int q20Score, int q21Score, int q22Score, int q23Score, int q24Score, int chapter1Score,
+        int q25Score, int q26Score, int q27Score, int q28Score, int q29Score, int q30Score, int chapter2Score,
         double q1responseTime, double q2responseTime, double q3responseTime, double q4responseTime, double q5responseTime, 
         double q6responseTime, double q7responseTime, double q8responseTime, double q9responseTime, double q10responseTime, 
         double q11responseTime, double q12responseTime, double q13responseTime, double q14responseTime,
         double q15responseTime, double q16responseTime, double q17responseTime, double q18responseTime, double q19responseTime, 
         double q20responseTime, double q21responseTime, double q22responseTime, double q23responseTime, double q24responseTime, 
-        double chapter1responseTime)
+        double chapter1responseTime, double q25responseTime, double q26responseTime, double q27responseTime, double q28responseTime,
+        double q29responseTime, double q30responseTime, double chapter2responseTime)
     {
         var userData = new Dictionary<string, object>
         {
@@ -414,22 +431,14 @@ public class QuizManager : MonoBehaviour
             { "F9_19SorununTepkiSüresi", q19responseTime }, { "G0_20SorununTepkiSüresi", q20responseTime }, { "G1_21SorununTepkiSüresi", q21responseTime }, 
             { "G2_22SorununTepkiSüresi", q22responseTime }, { "G3_23SorununTepkiSüresi", q23responseTime }, { "G4_24SorununTepkiSüresi", q24responseTime },
             { "G5_1BÖLÜMTOPLAMTEPKİSÜRESİ", chapter1responseTime },
+            { "G6_25SorununPuanı", q25Score }, { "G7_26SorununPuanı", q26Score }, { "G8_27SorununPuanı", q27Score }, { "G9_28SorununPuanı", q28Score }, 
+            { "H0_29SorununPuanı", q29Score }, { "H1_30SorununPuanı", q30Score },
+            { "H2_2BÖLÜMTOPLAMPUANI", chapter2Score },
+            { "H3_25SorununTepkiSüresi", q25responseTime }, { "H4_26SorununTepkiSüresi", q26responseTime }, { "H5_27SorununTepkiSüresi", q27responseTime },
+            { "H6_28SorununTepkiSüresi", q28responseTime }, { "H7_29SorununTepkiSüresi", q29responseTime }, { "H8_30SorununTepkiSüresi", q30responseTime },
+            { "H9_2BÖLÜMTOPLAMTEPKİSÜRESİ", chapter2responseTime },
             
             
-            { "G6_25SorununPuanı", q24Score },
-            { "G7_26SorununPuanı", q24Score },
-            { "G8_27SorununPuanı", q24Score },
-            { "G9_28SorununPuanı", q24Score },
-            { "H0_29SorununPuanı", q24Score },
-            { "H1_30SorununPuanı", q24Score },
-            { "H2_2BÖLÜMTOPLAMPUANI", chapter1Score },
-            { "H3_25SorununTepkiSüresi", q24responseTime },
-            { "H4_26SorununTepkiSüresi", q24responseTime },
-            { "H5_27SorununTepkiSüresi", q24responseTime },
-            { "H6_28SorununTepkiSüresi", q24responseTime },
-            { "H7_29SorununTepkiSüresi", q24responseTime },
-            { "H8_30SorununTepkiSüresi", q24responseTime },
-            { "H9_2BÖLÜMTOPLAMTEPKİSÜRESİ", chapter1responseTime },
             { "I0_31SorununPuanı", q24Score },
             { "I1_32SorununPuanı", q24Score },
             { "I2_33SorununPuanı", q24Score },
