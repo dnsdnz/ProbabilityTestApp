@@ -164,24 +164,24 @@ public class QuizManager : MonoBehaviour
     void OnStartButtonClicked()
     {
         //TODO OPEN CODES!!
-        // if (string.IsNullOrEmpty(collectorNameInputField.text) || string.IsNullOrEmpty(childNameInputField.text) ||
-        //     string.IsNullOrEmpty(birthdayInputField.text) || genderDropdown.value == 0 ||
-        //     motherEducationDropdown.value == 0 || fatherEducationDropdown.value == 0 ||
-        //     siblingCountDropdown.value == 0 || locationDropdown.value == 0
-        //     || locationDetailDropdown.value == 0 || getPreEducationDropdown.value == 0)
-        // {
-        //     Debug.Log("Eksik bilgileri doldur!");
-        //     return;
-        // }
-        //
-        // if (getPreEducationDropdown.value == 1)
-        // {
-        //     if (preEducationTimeDropdown.value == 0)
-        //     {
-        //         Debug.Log("Eksik bilgileri doldur!");
-        //         return;
-        //     }
-        // }
+        if (string.IsNullOrEmpty(collectorNameInputField.text) || string.IsNullOrEmpty(childNameInputField.text) ||
+            string.IsNullOrEmpty(birthdayInputField.text) || genderDropdown.value == 0 ||
+            motherEducationDropdown.value == 0 || fatherEducationDropdown.value == 0 ||
+            siblingCountDropdown.value == 0 || locationDropdown.value == 0
+            || locationDetailDropdown.value == 0 || getPreEducationDropdown.value == 0)
+        {
+            Debug.Log("Eksik bilgileri doldur!");
+            return;
+        }
+        
+        if (getPreEducationDropdown.value == 1)
+        {
+            if (preEducationTimeDropdown.value == 0)
+            {
+                Debug.Log("Eksik bilgileri doldur!");
+                return;
+            }
+        }
 
         collectorName = collectorNameInputField.text;
         childName = childNameInputField.text;
@@ -349,13 +349,13 @@ public class QuizManager : MonoBehaviour
         fullSessionTime = (DateTime.Now - appStartDateTime).TotalSeconds;
 
         var chapter1Score = 0;
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 24; i++)
         {
             chapter1Score += results[i];
         }
 
         var chapter1ResponseTime = 0.0;
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 24; i++)
         {
             chapter1ResponseTime += responseTimes[i];
         }
@@ -364,15 +364,15 @@ public class QuizManager : MonoBehaviour
             locationDetail, getEducationBefore, preEducationTime, appStartTime, appEndTime, fullSessionTime, completeScore,
             results[0], results[1], results[2], results[3], results[4], results[5], 
             results[6], results[7], results[8], results[9], results[10], results[11], 
-            results[12], results[13], results[14], results[15], results[15], results[15], 
-            results[15], results[15], results[15], results[15], results[15], results[15],
+            results[12], results[13], results[14], results[15], results[16], results[17], 
+            results[18], results[19], results[20], results[21], results[22], results[23],
             chapter1Score,
             responseTimes[0], responseTimes[1], responseTimes[2], responseTimes[3],
             responseTimes[4], responseTimes[5], responseTimes[6], responseTimes[7],
             responseTimes[8], responseTimes[9], responseTimes[10], responseTimes[11],
             responseTimes[12], responseTimes[13], responseTimes[14], responseTimes[15],
-            responseTimes[15], responseTimes[15], responseTimes[15], responseTimes[15],
-            responseTimes[15], responseTimes[15], responseTimes[15], responseTimes[15],
+            responseTimes[16], responseTimes[17], responseTimes[18], responseTimes[19],
+            responseTimes[20], responseTimes[21], responseTimes[22], responseTimes[23],
             chapter1ResponseTime);
     }
 
@@ -416,46 +416,46 @@ public class QuizManager : MonoBehaviour
             { "G5_1BÖLÜMTOPLAMTEPKİSÜRESİ", chapter1responseTime },
             
             
-            { "G6_25SorununPuanı", q1responseTime },
-            { "G7_26SorununPuanı", q2responseTime },
-            { "G8_27SorununPuanı", q1responseTime },
-            { "G9_28SorununPuanı", q2responseTime },
-            { "H0_29SorununPuanı", q1responseTime },
-            { "H1_30SorununPuanı", q2responseTime },
+            { "G6_25SorununPuanı", q24Score },
+            { "G7_26SorununPuanı", q24Score },
+            { "G8_27SorununPuanı", q24Score },
+            { "G9_28SorununPuanı", q24Score },
+            { "H0_29SorununPuanı", q24Score },
+            { "H1_30SorununPuanı", q24Score },
             { "H2_2BÖLÜMTOPLAMPUANI", chapter1Score },
-            { "H3_25SorununTepkiSüresi", q1responseTime },
-            { "H4_26SorununTepkiSüresi", q2responseTime },
-            { "H5_27SorununTepkiSüresi", q1responseTime },
-            { "H6_28SorununTepkiSüresi", q2responseTime },
-            { "H7_29SorununTepkiSüresi", q1responseTime },
-            { "H8_30SorununTepkiSüresi", q1responseTime },
+            { "H3_25SorununTepkiSüresi", q24responseTime },
+            { "H4_26SorununTepkiSüresi", q24responseTime },
+            { "H5_27SorununTepkiSüresi", q24responseTime },
+            { "H6_28SorununTepkiSüresi", q24responseTime },
+            { "H7_29SorununTepkiSüresi", q24responseTime },
+            { "H8_30SorununTepkiSüresi", q24responseTime },
             { "H9_2BÖLÜMTOPLAMTEPKİSÜRESİ", chapter1responseTime },
-            { "I0_31SorununPuanı", q1responseTime },
-            { "I1_32SorununPuanı", q2responseTime },
-            { "I2_33SorununPuanı", q1responseTime },
-            { "I3_34SorununPuanı", q2responseTime },
-            { "I4_35SorununPuanı", q1responseTime },
-            { "I5_36SorununPuanı", q2responseTime },
-            { "I6_37SorununPuanı", q2responseTime },
-            { "I7_38SorununPuanı", q2responseTime },
-            { "I8_39SorununPuanı", q2responseTime },
-            { "I9_40SorununPuanı", q2responseTime },
-            { "J0_41SorununPuanı", q2responseTime },
-            { "J1_42SorununPuanı", q2responseTime },
+            { "I0_31SorununPuanı", q24Score },
+            { "I1_32SorununPuanı", q24Score },
+            { "I2_33SorununPuanı", q24Score },
+            { "I3_34SorununPuanı", q24Score },
+            { "I4_35SorununPuanı", q24Score },
+            { "I5_36SorununPuanı", q24Score },
+            { "I6_37SorununPuanı", q24Score },
+            { "I7_38SorununPuanı", q24Score },
+            { "I8_39SorununPuanı", q24Score },
+            { "I9_40SorununPuanı", q24Score },
+            { "J0_41SorununPuanı", q24Score },
+            { "J1_42SorununPuanı", q24Score },
             { "J2_3BÖLÜMTOPLAMPUANI", chapter1Score },
-            { "J3_31SorununTepkiSüresi", q1responseTime },
-            { "J4_32SorununTepkiSüresi", q2responseTime },
-            { "J5_33SorununTepkiSüresi", q1responseTime },
-            { "J6_34SorununTepkiSüresi", q2responseTime },
-            { "J7_35SorununTepkiSüresi", q1responseTime },
-            { "J8_36SorununTepkiSüresi", q1responseTime },
-            { "J9_37SorununTepkiSüresi", q1responseTime },
-            { "K0_38SorununTepkiSüresi", q1responseTime },
-            { "K1_39SorununTepkiSüresi", q1responseTime },
-            { "K2_40SorununTepkiSüresi", q1responseTime },
-            { "K3_41SorununTepkiSüresi", q1responseTime },
-            { "K4_42SorununTepkiSüresi", q1responseTime },
-            { "K5_3BÖLÜMTOPLAMTEPKİSÜRESİ", chapter1Score }
+            { "J3_31SorununTepkiSüresi", q24responseTime },
+            { "J4_32SorununTepkiSüresi", q24responseTime },
+            { "J5_33SorununTepkiSüresi", q24responseTime },
+            { "J6_34SorununTepkiSüresi", q24responseTime },
+            { "J7_35SorununTepkiSüresi", q24responseTime },
+            { "J8_36SorununTepkiSüresi", q24responseTime },
+            { "J9_37SorununTepkiSüresi", q24responseTime },
+            { "K0_38SorununTepkiSüresi", q24responseTime },
+            { "K1_39SorununTepkiSüresi", q24responseTime },
+            { "K2_40SorununTepkiSüresi", q24responseTime },
+            { "K3_41SorununTepkiSüresi", q24responseTime },
+            { "K4_42SorununTepkiSüresi", q24responseTime },
+            { "K5_3BÖLÜMTOPLAMTEPKİSÜRESİ", chapter1responseTime }
         };
 
         databaseReference
