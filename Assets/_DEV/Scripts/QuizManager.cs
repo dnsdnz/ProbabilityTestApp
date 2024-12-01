@@ -164,24 +164,24 @@ public class QuizManager : MonoBehaviour
     void OnStartButtonClicked()
     {
         //TODO OPEN CODES!!
-        if (string.IsNullOrEmpty(collectorNameInputField.text) || string.IsNullOrEmpty(childNameInputField.text) ||
-            string.IsNullOrEmpty(birthdayInputField.text) || genderDropdown.value == 0 ||
-            motherEducationDropdown.value == 0 || fatherEducationDropdown.value == 0 ||
-            siblingCountDropdown.value == 0 || locationDropdown.value == 0
-            || locationDetailDropdown.value == 0 || getPreEducationDropdown.value == 0)
-        {
-            Debug.Log("Eksik bilgileri doldur!");
-            return;
-        }
-        
-        if (getPreEducationDropdown.value == 1)
-        {
-            if (preEducationTimeDropdown.value == 0)
-            {
-                Debug.Log("Eksik bilgileri doldur!");
-                return;
-            }
-        }
+        // if (string.IsNullOrEmpty(collectorNameInputField.text) || string.IsNullOrEmpty(childNameInputField.text) ||
+        //     string.IsNullOrEmpty(birthdayInputField.text) || genderDropdown.value == 0 ||
+        //     motherEducationDropdown.value == 0 || fatherEducationDropdown.value == 0 ||
+        //     siblingCountDropdown.value == 0 || locationDropdown.value == 0
+        //     || locationDetailDropdown.value == 0 || getPreEducationDropdown.value == 0)
+        // {
+        //     Debug.Log("Eksik bilgileri doldur!");
+        //     return;
+        // }
+        //
+        // if (getPreEducationDropdown.value == 1)
+        // {
+        //     if (preEducationTimeDropdown.value == 0)
+        //     {
+        //         Debug.Log("Eksik bilgileri doldur!");
+        //         return;
+        //     }
+        // }
 
         collectorName = collectorNameInputField.text;
         childName = childNameInputField.text;
