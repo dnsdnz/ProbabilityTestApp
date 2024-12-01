@@ -39,6 +39,7 @@ public class QuizManager : MonoBehaviour
         public Button correctButton;
         public Button[] allButtons;
         public AudioClip questionAudio;
+        public AudioClip questionAudio2; 
         public int chapterNo;
     }
 
@@ -191,7 +192,7 @@ public class QuizManager : MonoBehaviour
         motherEducation = motherEducationDropdown.options[motherEducationDropdown.value].text;
         fatherEducation = fatherEducationDropdown.options[fatherEducationDropdown.value].text;
         siblingCount = siblingCountDropdown.options[siblingCountDropdown.value].text;
-        location = locationDropdown.options[locationDetailDropdown.value].text;
+        location = locationDropdown.options[locationDropdown.value].text;
         locationDetail = locationDetailDropdown.options[locationDetailDropdown.value].text;
         getEducationBefore = getPreEducationDropdown.options[getPreEducationDropdown.value].text;
         preEducationTime = preEducationTimeDropdown.options[preEducationTimeDropdown.value].text;
@@ -233,6 +234,15 @@ public class QuizManager : MonoBehaviour
                 button.onClick.AddListener(() => OnButtonClicked(button));
             }
         }
+        else if (questionPanels[index].chapterNo == 4)
+        {
+            foreach (var button in questionPanels[index].allButtons)
+            {
+                button.gameObject.SetActive(false);
+                button.onClick.RemoveAllListeners();
+                button.onClick.AddListener(() => OnButtonClicked(button));
+            }
+        }
         else
         {
             foreach (var button in questionPanels[index].allButtons)
@@ -253,10 +263,18 @@ public class QuizManager : MonoBehaviour
         {
             audioSource.clip = questionPanels[index].questionAudio;
             audioSource.Play();
-
+            
             if (questionPanels[index].chapterNo == 2)
             {
                 StartCoroutine(EnableButtonsAfterAudio(questionPanels[index].allButtons, audioSource.clip.length));
+            }
+            else if (questionPanels[index].chapterNo == 4)
+            {
+                StartCoroutine(PlayAudioAndEnableButtonsWithSecondAudio(
+                    questionPanels[index].questionAudio,
+                    questionPanels[index].questionAudio2,
+                    questionPanels[index].allButtons
+                ));
             }
             else
             {
@@ -288,11 +306,9 @@ public class QuizManager : MonoBehaviour
     IEnumerator ActivateButtonsAfterAudio(Button[] buttons, float audioLength)
     {
         float adjustedAudioLength = audioLength;
-
         while (adjustedAudioLength > 0)
         {
             yield return null;
-
             if (!isPaused)
             {
                 adjustedAudioLength -= Time.deltaTime;
@@ -304,7 +320,55 @@ public class QuizManager : MonoBehaviour
             button.interactable = true;
         }
     }
+    
+    IEnumerator PlayAudioAndEnableButtonsWithSecondAudio(AudioClip questionAudio, AudioClip questionAudio2, Button[] buttons)
+    {
 
+        // İlk sesin süresi boyunca bekle (Pause durumunu kontrol ederek)
+        float adjustedAudioLength = questionAudio.length;
+        while (adjustedAudioLength > 0)
+        {
+            yield return null;
+            if (!isPaused)
+            {
+                adjustedAudioLength -= Time.deltaTime;
+            }
+        }
+
+        // İlk sesin ardından butonları görünür yap ama tıklanamaz hale getir
+        foreach (var button in buttons)
+        {
+            button.gameObject.SetActive(true);
+            button.interactable = false; // Tıklanamaz yap
+        }
+
+        // İkinci ses varsa çal
+        if (questionAudio2 != null)
+        {
+            audioSource.clip = questionAudio2;
+            audioSource.Play();
+
+            // İkinci sesin süresi boyunca bekle (Pause durumunu kontrol ederek)
+            adjustedAudioLength = questionAudio2.length;
+            while (adjustedAudioLength > 0)
+            {
+                yield return null;
+                if (!isPaused)
+                {
+                    adjustedAudioLength -= Time.deltaTime;
+                }
+            }
+        }
+
+        // İkinci sesin ardından butonları tıklanabilir yap
+        foreach (var button in buttons)
+        {
+            button.interactable = true; // Tıklanabilir yap
+        }
+    }
+
+
+    
     void OnButtonClicked(Button clickedButton)
     {
         foreach (var button in questionPanels[currentPanelIndex].allButtons)

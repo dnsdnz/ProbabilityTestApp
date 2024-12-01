@@ -10,8 +10,8 @@ public class MoveEffect : MonoBehaviour
 
     void Start()
     {
-        GetComponent<RectTransform>().DOAnchorPosY(GetComponent<RectTransform>().anchoredPosition.y + moveDistance, animationDuration)
-            .SetEase(Ease.InOutSine) 
-            .SetLoops(-1, LoopType.Yoyo); 
+        GetComponent<RectTransform>()
+            .DOAnchorPosY(GetComponent<RectTransform>().anchoredPosition.y + moveDistance, animationDuration)
+            .SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo); 
     }
 }
