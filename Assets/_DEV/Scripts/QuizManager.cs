@@ -49,9 +49,8 @@ public class QuizManager : MonoBehaviour
     public bool isAnswered = false;
     public bool isQuestionActive = false;
 
-    public List<int> results = new List<int>(); // correct1-wrong0
+    public List<int> results = new List<int>(); 
 
-    //public List<string> questionOpenTimes = new List<string>();
     public List<string> questionAnswerTimes = new List<string>();
     public List<double> responseTimes = new List<double>();
 
@@ -164,25 +163,24 @@ public class QuizManager : MonoBehaviour
 
     void OnStartButtonClicked()
     {
-        //TODO OPEN CODES!!
-        // if (string.IsNullOrEmpty(collectorNameInputField.text) || string.IsNullOrEmpty(childNameInputField.text) ||
-        //     string.IsNullOrEmpty(birthdayInputField.text) || genderDropdown.value == 0 ||
-        //     motherEducationDropdown.value == 0 || fatherEducationDropdown.value == 0 ||
-        //     siblingCountDropdown.value == 0 || locationDropdown.value == 0
-        //     || locationDetailDropdown.value == 0 || getPreEducationDropdown.value == 0)
-        // {
-        //     Debug.Log("Eksik bilgileri doldur!");
-        //     return;
-        // }
-        //
-        // if (getPreEducationDropdown.value == 1)
-        // {
-        //     if (preEducationTimeDropdown.value == 0)
-        //     {
-        //         Debug.Log("Eksik bilgileri doldur!");
-        //         return;
-        //     }
-        // }
+        if (string.IsNullOrEmpty(collectorNameInputField.text) || string.IsNullOrEmpty(childNameInputField.text) ||
+            string.IsNullOrEmpty(birthdayInputField.text) || genderDropdown.value == 0 ||
+            motherEducationDropdown.value == 0 || fatherEducationDropdown.value == 0 ||
+            siblingCountDropdown.value == 0 || locationDropdown.value == 0
+            || locationDetailDropdown.value == 0 || getPreEducationDropdown.value == 0)
+        {
+            Debug.Log("Eksik bilgileri doldur!");
+            return;
+        }
+        
+        if (getPreEducationDropdown.value == 1)
+        {
+            if (preEducationTimeDropdown.value == 0)
+            {
+                Debug.Log("Eksik bilgileri doldur!");
+                return;
+            }
+        }
 
         collectorName = collectorNameInputField.text;
         childName = childNameInputField.text;
@@ -222,9 +220,7 @@ public class QuizManager : MonoBehaviour
 
         questionPanels[index].panel.SetActive(true);
         currentPanelIndex = index;
-
-        //questionOpenTimes.Add(DateTime.Now.ToString("HH:mm:ss"));
-
+        
         if (questionPanels[index].chapterNo == 2)
         {
             foreach (var button in questionPanels[index].allButtons)
@@ -323,8 +319,6 @@ public class QuizManager : MonoBehaviour
     
     IEnumerator PlayAudioAndEnableButtonsWithSecondAudio(AudioClip questionAudio, AudioClip questionAudio2, Button[] buttons)
     {
-
-        // İlk sesin süresi boyunca bekle (Pause durumunu kontrol ederek)
         float adjustedAudioLength = questionAudio.length;
         while (adjustedAudioLength > 0)
         {
@@ -335,20 +329,17 @@ public class QuizManager : MonoBehaviour
             }
         }
 
-        // İlk sesin ardından butonları görünür yap ama tıklanamaz hale getir
         foreach (var button in buttons)
         {
             button.gameObject.SetActive(true);
-            button.interactable = false; // Tıklanamaz yap
+            button.interactable = false; 
         }
-
-        // İkinci ses varsa çal
+        
         if (questionAudio2 != null)
         {
             audioSource.clip = questionAudio2;
             audioSource.Play();
 
-            // İkinci sesin süresi boyunca bekle (Pause durumunu kontrol ederek)
             adjustedAudioLength = questionAudio2.length;
             while (adjustedAudioLength > 0)
             {
@@ -360,14 +351,11 @@ public class QuizManager : MonoBehaviour
             }
         }
 
-        // İkinci sesin ardından butonları tıklanabilir yap
         foreach (var button in buttons)
         {
-            button.interactable = true; // Tıklanabilir yap
+            button.interactable = true; 
         }
     }
-
-
     
     void OnButtonClicked(Button clickedButton)
     {
@@ -434,6 +422,18 @@ public class QuizManager : MonoBehaviour
         {
             chapter2ResponseTime += responseTimes[i];
         }
+        
+        var chapter3Score = 0;
+        for (int i = 30; i < 42; i++)
+        {
+            chapter3Score += results[i];
+        }
+
+        var chapter3ResponseTime = 0.0;
+        for (int i = 30; i < 42; i++)
+        {
+            chapter3ResponseTime += responseTimes[i];
+        }
 
         WriteData(collectorName, appStartDay, childName, birthday, gender, motherEducation, fatherEducation, siblingCount, location, 
             locationDetail, getEducationBefore, preEducationTime, appStartTime, appEndTime, fullSessionTime, completeScore,
@@ -452,7 +452,15 @@ public class QuizManager : MonoBehaviour
             responseTimes[20], responseTimes[21], responseTimes[22], responseTimes[23],
             chapter1ResponseTime,
             responseTimes[24], responseTimes[25], responseTimes[26], responseTimes[27], 
-            responseTimes[28], responseTimes[29], chapter2ResponseTime);
+            responseTimes[28], responseTimes[29], 
+            chapter2ResponseTime,
+            results[30], results[31], results[32], results[33], results[34], results[35],  
+            results[36], results[37], results[38], results[39], results[40], results[41],
+            chapter3Score,
+            responseTimes[30], responseTimes[31], responseTimes[32], responseTimes[33], 
+            responseTimes[34], responseTimes[35], responseTimes[36], responseTimes[37], 
+            responseTimes[38], responseTimes[39], responseTimes[40], responseTimes[41], 
+            chapter3ResponseTime);
     }
 
     void WriteData(string collectorName, string appStartDay, string childName, string birthday, string gender, string motherEducation,
@@ -468,7 +476,12 @@ public class QuizManager : MonoBehaviour
         double q15responseTime, double q16responseTime, double q17responseTime, double q18responseTime, double q19responseTime, 
         double q20responseTime, double q21responseTime, double q22responseTime, double q23responseTime, double q24responseTime, 
         double chapter1responseTime, double q25responseTime, double q26responseTime, double q27responseTime, double q28responseTime,
-        double q29responseTime, double q30responseTime, double chapter2responseTime)
+        double q29responseTime, double q30responseTime, double chapter2responseTime,
+        int q31Score, int q32Score, int q33Score, int q34Score, int q35Score, int q36Score, int q37Score, int q38Score, 
+        int q39Score, int q40Score, int q41Score, int q42Score, int chapter3Score, double q31responseTime, double q32responseTime, 
+        double q33responseTime, double q34responseTime, double q35responseTime, double q36responseTime,  double q37responseTime, 
+        double q38responseTime, double q39responseTime, double q40responseTime, double q41responseTime, double q42responseTime,
+        double chapter3responseTime)
     {
         var userData = new Dictionary<string, object>
         {
@@ -501,34 +514,15 @@ public class QuizManager : MonoBehaviour
             { "H3_25SorununTepkiSüresi", q25responseTime }, { "H4_26SorununTepkiSüresi", q26responseTime }, { "H5_27SorununTepkiSüresi", q27responseTime },
             { "H6_28SorununTepkiSüresi", q28responseTime }, { "H7_29SorununTepkiSüresi", q29responseTime }, { "H8_30SorununTepkiSüresi", q30responseTime },
             { "H9_2BÖLÜMTOPLAMTEPKİSÜRESİ", chapter2responseTime },
-            
-            
-            { "I0_31SorununPuanı", q24Score },
-            { "I1_32SorununPuanı", q24Score },
-            { "I2_33SorununPuanı", q24Score },
-            { "I3_34SorununPuanı", q24Score },
-            { "I4_35SorununPuanı", q24Score },
-            { "I5_36SorununPuanı", q24Score },
-            { "I6_37SorununPuanı", q24Score },
-            { "I7_38SorununPuanı", q24Score },
-            { "I8_39SorununPuanı", q24Score },
-            { "I9_40SorununPuanı", q24Score },
-            { "J0_41SorununPuanı", q24Score },
-            { "J1_42SorununPuanı", q24Score },
-            { "J2_3BÖLÜMTOPLAMPUANI", chapter1Score },
-            { "J3_31SorununTepkiSüresi", q24responseTime },
-            { "J4_32SorununTepkiSüresi", q24responseTime },
-            { "J5_33SorununTepkiSüresi", q24responseTime },
-            { "J6_34SorununTepkiSüresi", q24responseTime },
-            { "J7_35SorununTepkiSüresi", q24responseTime },
-            { "J8_36SorununTepkiSüresi", q24responseTime },
-            { "J9_37SorununTepkiSüresi", q24responseTime },
-            { "K0_38SorununTepkiSüresi", q24responseTime },
-            { "K1_39SorununTepkiSüresi", q24responseTime },
-            { "K2_40SorununTepkiSüresi", q24responseTime },
-            { "K3_41SorununTepkiSüresi", q24responseTime },
-            { "K4_42SorununTepkiSüresi", q24responseTime },
-            { "K5_3BÖLÜMTOPLAMTEPKİSÜRESİ", chapter1responseTime }
+            { "I0_31SorununPuanı", q31Score }, { "I1_32SorununPuanı", q32Score }, { "I2_33SorununPuanı", q33Score }, { "I3_34SorununPuanı", q34Score },
+            { "I4_35SorununPuanı", q35Score }, { "I5_36SorununPuanı", q36Score }, { "I6_37SorununPuanı", q37Score }, { "I7_38SorununPuanı", q38Score },
+            { "I8_39SorununPuanı", q39Score }, { "I9_40SorununPuanı", q40Score }, { "J0_41SorununPuanı", q41Score }, { "J1_42SorununPuanı", q42Score },
+            { "J2_3BÖLÜMTOPLAMPUANI", chapter3Score },
+            { "J3_31SorununTepkiSüresi", q31responseTime }, { "J4_32SorununTepkiSüresi", q32responseTime }, { "J5_33SorununTepkiSüresi", q33responseTime },
+            { "J6_34SorununTepkiSüresi", q34responseTime }, { "J7_35SorununTepkiSüresi", q35responseTime }, { "J8_36SorununTepkiSüresi", q36responseTime },
+            { "J9_37SorununTepkiSüresi", q37responseTime }, { "K0_38SorununTepkiSüresi", q38responseTime }, { "K1_39SorununTepkiSüresi", q39responseTime },
+            { "K2_40SorununTepkiSüresi", q40responseTime }, { "K3_41SorununTepkiSüresi", q41responseTime }, { "K4_42SorununTepkiSüresi", q42responseTime },
+            { "K5_3BÖLÜMTOPLAMTEPKİSÜRESİ", chapter3responseTime }
         };
 
         databaseReference

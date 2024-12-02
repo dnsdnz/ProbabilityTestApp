@@ -62985,81 +62985,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 875779561}
   m_CullTransparentMesh: 1
---- !u!1 &875922658
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 875922659}
-  - component: {fileID: 875922661}
-  - component: {fileID: 875922660}
-  m_Layer: 5
-  m_Name: Icon
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &875922659
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 875922658}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2080952414}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 112.0522, y: 76.09}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &875922660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 875922658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.8201868, b: 0.514151, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 56f2b8fcb5b037548a4e66082b86910a, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &875922661
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 875922658}
-  m_CullTransparentMesh: 1
 --- !u!1 &876107657
 GameObject:
   m_ObjectHideFlags: 0
@@ -65043,7 +64968,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1511741318}
+      - m_Target: {fileID: 1474253693}
         m_TargetAssemblyTypeName: QuizManager, Assembly-CSharp
         m_MethodName: PauseGame
         m_Mode: 1
@@ -110204,110 +110129,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1511615608}
   m_CullTransparentMesh: 1
---- !u!1 &1511741317
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1511741319}
-  - component: {fileID: 1511741318}
-  m_Layer: 0
-  m_Name: QuizManager Test
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1511741318
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1511741317}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf961c20817da4e1292502f1ba47dc02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  introPanel: {fileID: 131390914}
-  successPanel: {fileID: 1230343743}
-  pausePanel: {fileID: 2001094225}
-  collectorNameInputField: {fileID: 392207213}
-  childNameInputField: {fileID: 313543537}
-  birthdayInputField: {fileID: 1407488942}
-  genderDropdown: {fileID: 1130350938}
-  motherEducationDropdown: {fileID: 690260447}
-  fatherEducationDropdown: {fileID: 2012998191}
-  siblingCountDropdown: {fileID: 482477334}
-  locationDropdown: {fileID: 1430608084}
-  locationDetailDropdown: {fileID: 923741590}
-  getPreEducationDropdown: {fileID: 1178165569}
-  preEducationTimeDropdown: {fileID: 592443742}
-  preEducationTimeDropdownParent: {fileID: 202478151}
-  startButton: {fileID: 1852072826}
-  isPaused: 0
-  questionPanels:
-  - panel: {fileID: 1465396290}
-    correctButton: {fileID: 1113006901}
-    allButtons:
-    - {fileID: 1561990492}
-    - {fileID: 701316536}
-    - {fileID: 1113006901}
-    questionAudio: {fileID: 8300000, guid: d2f1001ab635e4615aa9b497457f2ed5, type: 3}
-    questionAudio2: {fileID: 8300000, guid: 291042ed5dd6a468b92d33d8f2ec10ab, type: 3}
-    chapterNo: 4
-  - panel: {fileID: 2121844049}
-    correctButton: {fileID: 1978946102}
-    allButtons:
-    - {fileID: 1978946102}
-    - {fileID: 1683081277}
-    - {fileID: 2093789278}
-    - {fileID: 1648344141}
-    questionAudio: {fileID: 8300000, guid: cd94bea85ff674562bb7c2df8b8dc169, type: 3}
-    questionAudio2: {fileID: 8300000, guid: d543531442a4046e4a1bcc762af8025d, type: 3}
-    chapterNo: 4
-  - panel: {fileID: 454495197}
-    correctButton: {fileID: 1439965840}
-    allButtons:
-    - {fileID: 1443478701}
-    - {fileID: 1439965840}
-    - {fileID: 2087069774}
-    - {fileID: 798322755}
-    questionAudio: {fileID: 8300000, guid: cd94bea85ff674562bb7c2df8b8dc169, type: 3}
-    questionAudio2: {fileID: 8300000, guid: 6d5e03f567eb747fe80b747c7984af4e, type: 3}
-    chapterNo: 4
-  currentPanelIndex: 0
-  questionTimer: 90
-  isAnswered: 0
-  isQuestionActive: 0
-  results: 
-  questionAnswerTimes: []
-  responseTimes: []
-  audioSource: {fileID: 138761094}
-  nextPageAudioSource: {fileID: 423859622}
-  pauseStartTime: 0
-  totalPauseTime: 0
-  questionStartTime: 0
-  remainingAudioTime: 0
---- !u!4 &1511741319
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1511741317}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1513189223
 GameObject:
   m_ObjectHideFlags: 0
@@ -136338,7 +136159,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1511741318}
+      - m_Target: {fileID: 1474253693}
         m_TargetAssemblyTypeName: QuizManager, Assembly-CSharp
         m_MethodName: ResumeGame
         m_Mode: 1
@@ -142830,7 +142651,6 @@ RectTransform:
   - {fileID: 617622869}
   - {fileID: 1202677051}
   - {fileID: 1918320295}
-  - {fileID: 2080952414}
   m_Father: {fileID: 1340035736}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -149784,139 +149604,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2079978693}
   m_CullTransparentMesh: 1
---- !u!1 &2080952413
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2080952414}
-  - component: {fileID: 2080952417}
-  - component: {fileID: 2080952416}
-  - component: {fileID: 2080952415}
-  m_Layer: 5
-  m_Name: PauseButton
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &2080952414
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2080952413}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 875922659}
-  m_Father: {fileID: 2001094226}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -34, y: -51}
-  m_SizeDelta: {x: 114.4653, y: 116.5929}
-  m_Pivot: {x: 1, y: 1}
---- !u!114 &2080952415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2080952413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 2080952416}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1474253693}
-        m_TargetAssemblyTypeName: QuizManager, Assembly-CSharp
-        m_MethodName: PauseGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &2080952416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2080952413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.8235294, b: 0.5176471, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 69099f33b38454227a000cc876cdf52e, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &2080952417
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2080952413}
-  m_CullTransparentMesh: 1
 --- !u!1 &2081045636
 GameObject:
   m_ObjectHideFlags: 0
@@ -155062,6 +154749,5 @@ SceneRoots:
   - {fileID: 1340035736}
   - {fileID: 479690329}
   - {fileID: 1474253694}
-  - {fileID: 1511741319}
   - {fileID: 138761093}
   - {fileID: 423859623}
