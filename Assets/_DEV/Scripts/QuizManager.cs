@@ -77,7 +77,8 @@ public class QuizManager : MonoBehaviour
     private int completeScore;
 
     public DateTime appStartDateTime;
-
+    public DateTime appEndDateTime;
+    
     public float pauseStartTime;
     public float totalPauseTime;
     public float questionStartTime;
@@ -87,8 +88,6 @@ public class QuizManager : MonoBehaviour
     {
         completeScore = 0;
         appStartDay = DateTime.Now.ToString("yyyy-MM-dd");
-        appStartTime = DateTime.Now.ToString("HH:mm:ss");
-        appStartDateTime = DateTime.Now;
 
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
         {
@@ -181,7 +180,7 @@ public class QuizManager : MonoBehaviour
                 return;
             }
         }
-
+        
         collectorName = collectorNameInputField.text;
         childName = childNameInputField.text;
         birthday = birthdayInputField.text;
@@ -206,6 +205,12 @@ public class QuizManager : MonoBehaviour
 
     void ShowPanel(int index)
     {
+        if (index == 0)
+        {
+            appStartTime = DateTime.Now.ToString("HH:mm:ss");
+            appStartDateTime = DateTime.Now;
+        }
+        
         foreach (var panel in questionPanels)
         {
             panel.panel.SetActive(false);
@@ -250,7 +255,7 @@ public class QuizManager : MonoBehaviour
         }
 
         questionTimer = 90f;
-        questionStartTime = Time.time;
+       
         totalPauseTime = 0f;
         isAnswered = false;
         isQuestionActive = true;
@@ -297,6 +302,8 @@ public class QuizManager : MonoBehaviour
         {
             button.gameObject.SetActive(true);
         }
+        
+        questionStartTime = Time.time;
     }
 
     IEnumerator ActivateButtonsAfterAudio(Button[] buttons, float audioLength)
@@ -315,6 +322,8 @@ public class QuizManager : MonoBehaviour
         {
             button.interactable = true;
         }
+        
+        questionStartTime = Time.time;
     }
     
     IEnumerator PlayAudioAndEnableButtonsWithSecondAudio(AudioClip questionAudio, AudioClip questionAudio2, Button[] buttons)
@@ -349,6 +358,8 @@ public class QuizManager : MonoBehaviour
                     adjustedAudioLength -= Time.deltaTime;
                 }
             }
+            
+            questionStartTime = Time.time;
         }
 
         foreach (var button in buttons)
@@ -380,7 +391,7 @@ public class QuizManager : MonoBehaviour
         completeScore += isCorrect ? 1 : 0;
 
         questionAnswerTimes.Add(DateTime.Now.ToString("HH:mm:ss"));
-        responseTimes.Add(responseTime * 1000);
+        responseTimes.Add(responseTime);
 
         nextPageAudioSource.Play();
         StartCoroutine(ShowPanelAfterDelay(currentPanelIndex + 1, 2));
@@ -397,8 +408,16 @@ public class QuizManager : MonoBehaviour
         Debug.Log("Quiz done! Sending to Firebase...");
 
         appEndTime = DateTime.Now.ToString("HH:mm:ss");
-        fullSessionTime = (DateTime.Now - appStartDateTime).TotalSeconds;
+        appEndDateTime = DateTime.Now;
 
+        TimeSpan elapsedTime = appEndDateTime - appStartDateTime;
+        
+        fullSessionTime = (appEndDateTime - appStartDateTime).TotalMilliseconds;
+        
+        Debug.Log("elapsedTime:" + elapsedTime);
+        Debug.Log("TotalMilliseconds:" + elapsedTime.TotalMilliseconds);
+
+        
         var chapter1Score = 0;
         for (int i = 0; i < 24; i++)
         {
@@ -435,6 +454,15 @@ public class QuizManager : MonoBehaviour
             chapter3ResponseTime += responseTimes[i];
         }
 
+        var completeTime = 0.0;
+        for (int i = 0; i < 42; i++)
+        {
+            completeTime += responseTimes[i];
+        }
+        
+        Debug.Log("complete time" + completeTime);
+
+        
         WriteData(collectorName, appStartDay, childName, birthday, gender, motherEducation, fatherEducation, siblingCount, location, 
             locationDetail, getEducationBefore, preEducationTime, appStartTime, appEndTime, fullSessionTime, completeScore,
             results[0], results[1], results[2], results[3], results[4], results[5], 
