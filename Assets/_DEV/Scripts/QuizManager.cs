@@ -419,75 +419,71 @@ public class QuizManager : MonoBehaviour
 
         
         var chapter1Score = 0;
-        for (int i = 0; i < 24; i++)
+        for (int i = 0; i < 16; i++)
         {
             chapter1Score += results[i];
         }
 
         var chapter1ResponseTime = 0.0;
-        for (int i = 0; i < 24; i++)
+        for (int i = 0; i < 16; i++)
         {
             chapter1ResponseTime += responseTimes[i];
         }
         
         var chapter2Score = 0;
-        for (int i = 24; i < 30; i++)
+        for (int i = 16; i < 21; i++)
         {
             chapter2Score += results[i];
         }
 
         var chapter2ResponseTime = 0.0;
-        for (int i = 24; i < 30; i++)
+        for (int i = 16; i < 21; i++)
         {
             chapter2ResponseTime += responseTimes[i];
         }
         
         var chapter3Score = 0;
-        for (int i = 30; i < 42; i++)
+        for (int i = 21; i < 31; i++)
         {
             chapter3Score += results[i];
         }
 
         var chapter3ResponseTime = 0.0;
-        for (int i = 30; i < 42; i++)
+        for (int i = 21; i < 31; i++)
         {
             chapter3ResponseTime += responseTimes[i];
         }
 
         var completeTime = 0.0;
-        for (int i = 0; i < 42; i++)
+        for (int i = 0; i < 31; i++)
         {
             completeTime += responseTimes[i];
         }
         
         Debug.Log("complete time" + completeTime);
-
         
         WriteData(collectorName, appStartDay, childName, birthday, gender, motherEducation, fatherEducation, siblingCount, location, 
             locationDetail, getEducationBefore, preEducationTime, appStartTime, appEndTime, fullSessionTime, completeScore,
             results[0], results[1], results[2], results[3], results[4], results[5], 
             results[6], results[7], results[8], results[9], results[10], results[11], 
-            results[12], results[13], results[14], results[15], results[16], results[17], 
-            results[18], results[19], results[20], results[21], results[22], results[23],
+            results[12], results[13], results[14], results[15],
             chapter1Score,
-            results[24], results[25], results[26], results[27], results[28], results[29], 
+            results[16], results[17], results[18], results[19], results[20], 
             chapter2Score,
             responseTimes[0], responseTimes[1], responseTimes[2], responseTimes[3],
             responseTimes[4], responseTimes[5], responseTimes[6], responseTimes[7],
             responseTimes[8], responseTimes[9], responseTimes[10], responseTimes[11],
             responseTimes[12], responseTimes[13], responseTimes[14], responseTimes[15],
-            responseTimes[16], responseTimes[17], responseTimes[18], responseTimes[19],
-            responseTimes[20], responseTimes[21], responseTimes[22], responseTimes[23],
             chapter1ResponseTime,
-            responseTimes[24], responseTimes[25], responseTimes[26], responseTimes[27], 
-            responseTimes[28], responseTimes[29], 
+            responseTimes[16], responseTimes[17], responseTimes[18], responseTimes[19], 
+            responseTimes[20], 
             chapter2ResponseTime,
-            results[30], results[31], results[32], results[33], results[34], results[35],  
-            results[36], results[37], results[38], results[39], results[40], results[41],
+            results[21], results[22], results[23], results[24], results[25],  
+            results[26], results[27], results[28], results[29], results[30],
             chapter3Score,
-            responseTimes[30], responseTimes[31], responseTimes[32], responseTimes[33], 
-            responseTimes[34], responseTimes[35], responseTimes[36], responseTimes[37], 
-            responseTimes[38], responseTimes[39], responseTimes[40], responseTimes[41], 
+            responseTimes[21], responseTimes[22], responseTimes[23], responseTimes[24], 
+            responseTimes[25], responseTimes[26], responseTimes[27], responseTimes[28], 
+            responseTimes[29], responseTimes[30],
             chapter3ResponseTime);
     }
 
@@ -495,20 +491,19 @@ public class QuizManager : MonoBehaviour
         string fatherEducation, string siblingCount, string location, string locationDetail, string getEducationBefore,
         string preEducationTime, string appStartTime, string appEndTime, double fullSessionTime, int completeScore,
         int q1Score, int q2Score, int q3Score, int q4Score, int q5Score, int q6Score, int q7Score, int q8Score, int q9Score,
-        int q10Score, int q11Score, int q12Score, int q13Score, int q14Score, int q15Score, int q16Score, int q17Score, 
-        int q18Score, int q19Score, int q20Score, int q21Score, int q22Score, int q23Score, int q24Score, int chapter1Score,
-        int q25Score, int q26Score, int q27Score, int q28Score, int q29Score, int q30Score, int chapter2Score,
+        int q10Score, int q11Score, int q12Score, int q13Score, int q14Score, int q15Score, int q16Score,
+         int chapter1Score,
+        int q25Score, int q26Score, int q27Score, int q29Score, int q30Score, int chapter2Score,
         double q1responseTime, double q2responseTime, double q3responseTime, double q4responseTime, double q5responseTime, 
         double q6responseTime, double q7responseTime, double q8responseTime, double q9responseTime, double q10responseTime, 
         double q11responseTime, double q12responseTime, double q13responseTime, double q14responseTime,
-        double q15responseTime, double q16responseTime, double q17responseTime, double q18responseTime, double q19responseTime, 
-        double q20responseTime, double q21responseTime, double q22responseTime, double q23responseTime, double q24responseTime, 
-        double chapter1responseTime, double q25responseTime, double q26responseTime, double q27responseTime, double q28responseTime,
+        double q15responseTime, double q16responseTime, 
+        double chapter1responseTime, double q25responseTime, double q26responseTime, double q27responseTime,
         double q29responseTime, double q30responseTime, double chapter2responseTime,
-        int q31Score, int q32Score, int q33Score, int q34Score, int q35Score, int q36Score, int q37Score, int q38Score, 
-        int q39Score, int q40Score, int q41Score, int q42Score, int chapter3Score, double q31responseTime, double q32responseTime, 
-        double q33responseTime, double q34responseTime, double q35responseTime, double q36responseTime,  double q37responseTime, 
-        double q38responseTime, double q39responseTime, double q40responseTime, double q41responseTime, double q42responseTime,
+        int q31Score, int q32Score, int q34Score, int q35Score, int q36Score, int q37Score, int q38Score, 
+        int q40Score, int q41Score, int q42Score, int chapter3Score, double q31responseTime, double q32responseTime, 
+        double q34responseTime, double q35responseTime, double q36responseTime,  double q37responseTime, 
+        double q38responseTime, double q40responseTime, double q41responseTime, double q42responseTime,
         double chapter3responseTime)
     {
         var userData = new Dictionary<string, object>
@@ -524,31 +519,27 @@ public class QuizManager : MonoBehaviour
             { "C0_5SorununPuanı", q5Score }, { "C1_6SorununPuanı", q6Score }, { "C2_7SorununPuanı", q7Score }, { "C3_8SorununPuanı", q8Score },
             { "C4_9SorununPuanı", q9Score }, { "C5_10SorununPuanı", q10Score }, { "C6_11SorununPuanı", q11Score }, { "C7_12SorununPuanı", q12Score },
             { "C8_13SorununPuanı", q13Score }, { "C9_14SorununPuanı", q14Score }, { "D0_15SorununPuanı", q15Score }, { "D1_16SorununPuanı", q16Score },
-            { "D2_17SorununPuanı", q17Score }, { "D3_18SorununPuanı", q18Score }, { "D4_19SorununPuanı", q19Score }, { "D5_20SorununPuanı", q20Score },
-            { "D6_21SorununPuanı", q21Score }, { "D7_22SorununPuanı", q22Score }, { "D8_23SorununPuanı", q23Score }, { "D9_24SorununPuanı", q24Score },
             { "E0_1BÖLÜMTOPLAMPUANI", chapter1Score },
             { "E1_1SorununTepkiSüresi", q1responseTime }, { "E2_2SorununTepkiSüresi", q2responseTime }, { "E3_3SorununTepkiSüresi", q3responseTime },
             { "E4_4SorununTepkiSüresi", q4responseTime }, { "E5_5SorununTepkiSüresi", q5responseTime }, { "E6_6SorununTepkiSüresi", q6responseTime },
             { "E7_7SorununTepkiSüresi", q7responseTime }, { "E8_8SorununTepkiSüresi", q8responseTime }, { "E9_9SorununTepkiSüresi", q9responseTime },
             { "F0_10SorununTepkiSüresi", q10responseTime }, { "F1_11SorununTepkiSüresi", q11responseTime }, { "F2_12SorununTepkiSüresi", q12responseTime },
             { "F3_13SorununTepkiSüresi", q13responseTime }, { "F4_14SorununTepkiSüresi", q14responseTime }, { "F5_15SorununTepkiSüresi", q15responseTime },
-            { "F6_16SorununTepkiSüresi", q16responseTime }, { "F7_17SorununTepkiSüresi", q17responseTime }, { "F8_18SorununTepkiSüresi", q18responseTime },
-            { "F9_19SorununTepkiSüresi", q19responseTime }, { "G0_20SorununTepkiSüresi", q20responseTime }, { "G1_21SorununTepkiSüresi", q21responseTime }, 
-            { "G2_22SorununTepkiSüresi", q22responseTime }, { "G3_23SorununTepkiSüresi", q23responseTime }, { "G4_24SorununTepkiSüresi", q24responseTime },
+            { "F6_16SorununTepkiSüresi", q16responseTime }, 
             { "G5_1BÖLÜMTOPLAMTEPKİSÜRESİ", chapter1responseTime },
-            { "G6_25SorununPuanı", q25Score }, { "G7_26SorununPuanı", q26Score }, { "G8_27SorununPuanı", q27Score }, { "G9_28SorununPuanı", q28Score }, 
+            { "G6_25SorununPuanı", q25Score }, { "G7_26SorununPuanı", q26Score }, { "G8_27SorununPuanı", q27Score },
             { "H0_29SorununPuanı", q29Score }, { "H1_30SorununPuanı", q30Score },
             { "H2_2BÖLÜMTOPLAMPUANI", chapter2Score },
             { "H3_25SorununTepkiSüresi", q25responseTime }, { "H4_26SorununTepkiSüresi", q26responseTime }, { "H5_27SorununTepkiSüresi", q27responseTime },
-            { "H6_28SorununTepkiSüresi", q28responseTime }, { "H7_29SorununTepkiSüresi", q29responseTime }, { "H8_30SorununTepkiSüresi", q30responseTime },
+            { "H7_29SorununTepkiSüresi", q29responseTime }, { "H8_30SorununTepkiSüresi", q30responseTime },
             { "H9_2BÖLÜMTOPLAMTEPKİSÜRESİ", chapter2responseTime },
-            { "I0_31SorununPuanı", q31Score }, { "I1_32SorununPuanı", q32Score }, { "I2_33SorununPuanı", q33Score }, { "I3_34SorununPuanı", q34Score },
+            { "I0_31SorununPuanı", q31Score }, { "I1_32SorununPuanı", q32Score }, { "I3_34SorununPuanı", q34Score },
             { "I4_35SorununPuanı", q35Score }, { "I5_36SorununPuanı", q36Score }, { "I6_37SorununPuanı", q37Score }, { "I7_38SorununPuanı", q38Score },
-            { "I8_39SorununPuanı", q39Score }, { "I9_40SorununPuanı", q40Score }, { "J0_41SorununPuanı", q41Score }, { "J1_42SorununPuanı", q42Score },
+             { "I9_40SorununPuanı", q40Score }, { "J0_41SorununPuanı", q41Score }, { "J1_42SorununPuanı", q42Score },
             { "J2_3BÖLÜMTOPLAMPUANI", chapter3Score },
-            { "J3_31SorununTepkiSüresi", q31responseTime }, { "J4_32SorununTepkiSüresi", q32responseTime }, { "J5_33SorununTepkiSüresi", q33responseTime },
+            { "J3_31SorununTepkiSüresi", q31responseTime }, { "J4_32SorununTepkiSüresi", q32responseTime }, 
             { "J6_34SorununTepkiSüresi", q34responseTime }, { "J7_35SorununTepkiSüresi", q35responseTime }, { "J8_36SorununTepkiSüresi", q36responseTime },
-            { "J9_37SorununTepkiSüresi", q37responseTime }, { "K0_38SorununTepkiSüresi", q38responseTime }, { "K1_39SorununTepkiSüresi", q39responseTime },
+            { "J9_37SorununTepkiSüresi", q37responseTime }, { "K0_38SorununTepkiSüresi", q38responseTime }, 
             { "K2_40SorununTepkiSüresi", q40responseTime }, { "K3_41SorununTepkiSüresi", q41responseTime }, { "K4_42SorununTepkiSüresi", q42responseTime },
             { "K5_3BÖLÜMTOPLAMTEPKİSÜRESİ", chapter3responseTime }
         };

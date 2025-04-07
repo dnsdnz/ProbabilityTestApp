@@ -36435,13 +36435,11 @@ RectTransform:
   m_Children:
   - {fileID: 435928779}
   - {fileID: 288093096}
-  - {fileID: 1610538823}
   - {fileID: 1772209215}
   - {fileID: 1161280736}
   - {fileID: 1340599167}
   - {fileID: 5743626}
   - {fileID: 987005793}
-  - {fileID: 1314203587}
   - {fileID: 1465396291}
   m_Father: {fileID: 1340035736}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -78917,7 +78915,6 @@ RectTransform:
   - {fileID: 1234597169}
   - {fileID: 818967743}
   - {fileID: 1526048325}
-  - {fileID: 1349251569}
   - {fileID: 17421509}
   - {fileID: 242251265}
   m_Father: {fileID: 1340035736}
@@ -95015,7 +95012,7 @@ RectTransform:
   - {fileID: 1995732910}
   - {fileID: 273872555}
   - {fileID: 452997650}
-  m_Father: {fileID: 499157757}
+  m_Father: {fileID: 1927895509}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -96887,10 +96884,10 @@ RectTransform:
   - {fileID: 131390915}
   - {fileID: 170054229}
   - {fileID: 1672883349}
-  - {fileID: 1927895509}
   - {fileID: 1087439598}
   - {fileID: 499157757}
   - {fileID: 396598054}
+  - {fileID: 1750196199}
   - {fileID: 1230343744}
   - {fileID: 2001094226}
   m_Father: {fileID: 0}
@@ -97355,7 +97352,7 @@ RectTransform:
   - {fileID: 560496553}
   - {fileID: 1405637200}
   - {fileID: 1351101201}
-  m_Father: {fileID: 1087439598}
+  m_Father: {fileID: 1927895509}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -107156,86 +107153,6 @@ MonoBehaviour:
     questionAudio: {fileID: 8300000, guid: bd993daef87784a07ace12c2e721d61a, type: 3}
     questionAudio2: {fileID: 0}
     chapterNo: 1
-  - panel: {fileID: 1511308882}
-    correctButton: {fileID: 142095077}
-    allButtons:
-    - {fileID: 1583268207}
-    - {fileID: 478955885}
-    - {fileID: 142095077}
-    - {fileID: 1004450134}
-    questionAudio: {fileID: 8300000, guid: 4d47473003a34475c9fbd3c0b1d09246, type: 3}
-    questionAudio2: {fileID: 0}
-    chapterNo: 1
-  - panel: {fileID: 846495531}
-    correctButton: {fileID: 1182735873}
-    allButtons:
-    - {fileID: 979979338}
-    - {fileID: 566528492}
-    - {fileID: 991165454}
-    - {fileID: 1182735873}
-    questionAudio: {fileID: 8300000, guid: 8291bf2fe142c4b1c91a92e819f38f6e, type: 3}
-    questionAudio2: {fileID: 0}
-    chapterNo: 1
-  - panel: {fileID: 1233808380}
-    correctButton: {fileID: 117655963}
-    allButtons:
-    - {fileID: 2056541536}
-    - {fileID: 575347056}
-    - {fileID: 2050979953}
-    - {fileID: 117655963}
-    questionAudio: {fileID: 8300000, guid: 9f60e9e3c7c154344ba1c0cf49e6b674, type: 3}
-    questionAudio2: {fileID: 0}
-    chapterNo: 1
-  - panel: {fileID: 618474659}
-    correctButton: {fileID: 1981777296}
-    allButtons:
-    - {fileID: 1488297285}
-    - {fileID: 2048092342}
-    - {fileID: 117019972}
-    - {fileID: 1981777296}
-    questionAudio: {fileID: 8300000, guid: 14ee6caff2196412b8c6225adddc3992, type: 3}
-    questionAudio2: {fileID: 0}
-    chapterNo: 1
-  - panel: {fileID: 898297586}
-    correctButton: {fileID: 907888679}
-    allButtons:
-    - {fileID: 907888679}
-    - {fileID: 2029004554}
-    - {fileID: 1521231247}
-    - {fileID: 1254709817}
-    questionAudio: {fileID: 8300000, guid: ce742b555bdd1498d8dd9d9bed853510, type: 3}
-    questionAudio2: {fileID: 0}
-    chapterNo: 1
-  - panel: {fileID: 359592748}
-    correctButton: {fileID: 106472825}
-    allButtons:
-    - {fileID: 807359253}
-    - {fileID: 1743341660}
-    - {fileID: 106472825}
-    - {fileID: 1938929695}
-    questionAudio: {fileID: 8300000, guid: 9f60e9e3c7c154344ba1c0cf49e6b674, type: 3}
-    questionAudio2: {fileID: 0}
-    chapterNo: 1
-  - panel: {fileID: 183166581}
-    correctButton: {fileID: 891723724}
-    allButtons:
-    - {fileID: 119023885}
-    - {fileID: 292130126}
-    - {fileID: 891723724}
-    - {fileID: 140676618}
-    questionAudio: {fileID: 8300000, guid: 8291bf2fe142c4b1c91a92e819f38f6e, type: 3}
-    questionAudio2: {fileID: 0}
-    chapterNo: 1
-  - panel: {fileID: 1984084260}
-    correctButton: {fileID: 1896886122}
-    allButtons:
-    - {fileID: 1946746754}
-    - {fileID: 1501024347}
-    - {fileID: 840311579}
-    - {fileID: 1896886122}
-    questionAudio: {fileID: 8300000, guid: 7c9340f1605664cc4998659baeaad074, type: 3}
-    questionAudio2: {fileID: 0}
-    chapterNo: 1
   - panel: {fileID: 1234597168}
     correctButton: {fileID: 2002631083}
     allButtons:
@@ -107259,14 +107176,6 @@ MonoBehaviour:
     - {fileID: 1650898590}
     - {fileID: 2088139754}
     questionAudio: {fileID: 8300000, guid: c34e2f8337ccc4ac1af4e930f503d436, type: 3}
-    questionAudio2: {fileID: 0}
-    chapterNo: 2
-  - panel: {fileID: 1349251568}
-    correctButton: {fileID: 489302049}
-    allButtons:
-    - {fileID: 1383518924}
-    - {fileID: 489302049}
-    questionAudio: {fileID: 8300000, guid: c699505822a8d4ca598c4a6d6cfb5dfc, type: 3}
     questionAudio2: {fileID: 0}
     chapterNo: 2
   - panel: {fileID: 17421508}
@@ -107300,14 +107209,6 @@ MonoBehaviour:
     - {fileID: 1779051655}
     - {fileID: 1403558542}
     questionAudio: {fileID: 8300000, guid: 6c72febb4685144a7b7f033c3042550e, type: 3}
-    questionAudio2: {fileID: 0}
-    chapterNo: 3
-  - panel: {fileID: 1610538822}
-    correctButton: {fileID: 979339309}
-    allButtons:
-    - {fileID: 2044225335}
-    - {fileID: 979339309}
-    questionAudio: {fileID: 8300000, guid: 80b91e417481740719fd20cbce1d5e1f, type: 3}
     questionAudio2: {fileID: 0}
     chapterNo: 3
   - panel: {fileID: 1772209214}
@@ -107351,15 +107252,6 @@ MonoBehaviour:
     - {fileID: 1860279940}
     questionAudio: {fileID: 8300000, guid: 0166bf792464c40e59e4bdeee503760a, type: 3}
     questionAudio2: {fileID: 8300000, guid: 38c4ed785d6c94c8baba67a3b6d2cb19, type: 3}
-    chapterNo: 4
-  - panel: {fileID: 1314203586}
-    correctButton: {fileID: 393079764}
-    allButtons:
-    - {fileID: 1075961219}
-    - {fileID: 393079764}
-    - {fileID: 1995711740}
-    questionAudio: {fileID: 8300000, guid: 879c96b98fa884dd7b215e9968245690, type: 3}
-    questionAudio2: {fileID: 8300000, guid: 243ec389db3af46c5b57c6aa1ef22f53, type: 3}
     chapterNo: 4
   - panel: {fileID: 1465396290}
     correctButton: {fileID: 1113006901}
@@ -117212,7 +117104,7 @@ RectTransform:
   - {fileID: 1871244392}
   - {fileID: 978437003}
   - {fileID: 1166661409}
-  m_Father: {fileID: 499157757}
+  m_Father: {fileID: 1927895509}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -125707,6 +125599,42 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1749009423}
   m_CullTransparentMesh: 1
+--- !u!1 &1750196198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1750196199}
+  m_Layer: 5
+  m_Name: REMOVED
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1750196199
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750196198}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1927895509}
+  m_Father: {fileID: 1340035736}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1752645616
 GameObject:
   m_ObjectHideFlags: 0
@@ -136827,7 +136755,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1927895508}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -136840,7 +136768,10 @@ RectTransform:
   - {fileID: 359592749}
   - {fileID: 183166582}
   - {fileID: 1984084261}
-  m_Father: {fileID: 1340035736}
+  - {fileID: 1349251569}
+  - {fileID: 1610538823}
+  - {fileID: 1314203587}
+  m_Father: {fileID: 1750196199}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
