@@ -162,24 +162,24 @@ public class QuizManager : MonoBehaviour
 
     void OnStartButtonClicked()
     {
-        if (string.IsNullOrEmpty(collectorNameInputField.text) || string.IsNullOrEmpty(childNameInputField.text) ||
-            string.IsNullOrEmpty(birthdayInputField.text) || genderDropdown.value == 0 ||
-            motherEducationDropdown.value == 0 || fatherEducationDropdown.value == 0 ||
-            siblingCountDropdown.value == 0 || locationDropdown.value == 0
-            || locationDetailDropdown.value == 0 || getPreEducationDropdown.value == 0)
-        {
-            Debug.Log("Eksik bilgileri doldur!");
-            return;
-        }
-        
-        if (getPreEducationDropdown.value == 1)
-        {
-            if (preEducationTimeDropdown.value == 0)
-            {
-                Debug.Log("Eksik bilgileri doldur!");
-                return;
-            }
-        }
+        // if (string.IsNullOrEmpty(collectorNameInputField.text) || string.IsNullOrEmpty(childNameInputField.text) ||
+        //     string.IsNullOrEmpty(birthdayInputField.text) || genderDropdown.value == 0 ||
+        //     motherEducationDropdown.value == 0 || fatherEducationDropdown.value == 0 ||
+        //     siblingCountDropdown.value == 0 || locationDropdown.value == 0
+        //     || locationDetailDropdown.value == 0 || getPreEducationDropdown.value == 0)
+        // {
+        //     Debug.Log("Eksik bilgileri doldur!");
+        //     return;
+        // }
+        //
+        // if (getPreEducationDropdown.value == 1)
+        // {
+        //     if (preEducationTimeDropdown.value == 0)
+        //     {
+        //         Debug.Log("Eksik bilgileri doldur!");
+        //         return;
+        //     }
+        // }
         
         collectorName = collectorNameInputField.text;
         childName = childNameInputField.text;
@@ -226,16 +226,16 @@ public class QuizManager : MonoBehaviour
         questionPanels[index].panel.SetActive(true);
         currentPanelIndex = index;
         
-        if (questionPanels[index].chapterNo == 2)
-        {
-            foreach (var button in questionPanels[index].allButtons)
-            {
-                button.gameObject.SetActive(false);
-                button.onClick.RemoveAllListeners();
-                button.onClick.AddListener(() => OnButtonClicked(button));
-            }
-        }
-        else if (questionPanels[index].chapterNo == 4)
+        // if (questionPanels[index].chapterNo == 2)
+        // {
+        //     foreach (var button in questionPanels[index].allButtons)
+        //     {
+        //         // button.gameObject.SetActive(false);
+        //         // button.onClick.RemoveAllListeners();
+        //         // button.onClick.AddListener(() => OnButtonClicked(button));
+        //     }
+        // }
+        if (questionPanels[index].chapterNo == 4) //iki sesli sorular için, chapter değil
         {
             foreach (var button in questionPanels[index].allButtons)
             {
@@ -265,11 +265,11 @@ public class QuizManager : MonoBehaviour
             audioSource.clip = questionPanels[index].questionAudio;
             audioSource.Play();
             
-            if (questionPanels[index].chapterNo == 2)
-            {
-                StartCoroutine(EnableButtonsAfterAudio(questionPanels[index].allButtons, audioSource.clip.length));
-            }
-            else if (questionPanels[index].chapterNo == 4)
+            // if (questionPanels[index].chapterNo == 2)
+            // {
+            //     StartCoroutine(EnableButtonsAfterAudio(questionPanels[index].allButtons, audioSource.clip.length));
+            // }
+            if (questionPanels[index].chapterNo == 4)
             {
                 StartCoroutine(PlayAudioAndEnableButtonsWithSecondAudio(
                     questionPanels[index].questionAudio,
@@ -417,94 +417,64 @@ public class QuizManager : MonoBehaviour
         Debug.Log("elapsedTime:" + elapsedTime);
         Debug.Log("TotalMilliseconds:" + elapsedTime.TotalMilliseconds);
 
-        
         var chapter1Score = 0;
-        for (int i = 0; i < 16; i++)
+        for (int i = 0; i < 7; i++)
         {
             chapter1Score += results[i];
         }
 
         var chapter1ResponseTime = 0.0;
-        for (int i = 0; i < 16; i++)
+        for (int i = 0; i < 7; i++)
         {
             chapter1ResponseTime += responseTimes[i];
         }
         
         var chapter2Score = 0;
-        for (int i = 16; i < 21; i++)
+        for (int i = 7; i < 13; i++)
         {
             chapter2Score += results[i];
         }
 
         var chapter2ResponseTime = 0.0;
-        for (int i = 16; i < 21; i++)
+        for (int i = 7; i < 13; i++)
         {
             chapter2ResponseTime += responseTimes[i];
         }
-        
-        var chapter3Score = 0;
-        for (int i = 21; i < 31; i++)
-        {
-            chapter3Score += results[i];
-        }
-
-        var chapter3ResponseTime = 0.0;
-        for (int i = 21; i < 31; i++)
-        {
-            chapter3ResponseTime += responseTimes[i];
-        }
 
         var completeTime = 0.0;
-        for (int i = 0; i < 31; i++)
+        for (int i = 0; i < 12; i++)
         {
             completeTime += responseTimes[i];
         }
         
         Debug.Log("complete time" + completeTime);
-        
-        WriteData(collectorName, appStartDay, childName, birthday, gender, motherEducation, fatherEducation, siblingCount, location, 
-            locationDetail, getEducationBefore, preEducationTime, appStartTime, appEndTime, fullSessionTime, completeScore,
-            results[0], results[1], results[2], results[3], results[4], results[5], 
-            results[6], results[7], results[8], results[9], results[10], results[11], 
-            results[12], results[13], results[14], results[15],
+
+        WriteData(collectorName, appStartDay, childName, birthday, gender, motherEducation, fatherEducation,
+            siblingCount, location,
+            locationDetail, getEducationBefore, preEducationTime, appStartTime, appEndTime, fullSessionTime,
+            completeScore,
+            results[0], results[1], results[2], results[3], results[4], results[5],
+            results[6], 
             chapter1Score,
-            results[16], results[17], results[18], results[19], results[20], 
+            results[7], results[8], results[9], results[10], results[11], results[12],
             chapter2Score,
             responseTimes[0], responseTimes[1], responseTimes[2], responseTimes[3],
             responseTimes[4], responseTimes[5], responseTimes[6], responseTimes[7],
-            responseTimes[8], responseTimes[9], responseTimes[10], responseTimes[11],
-            responseTimes[12], responseTimes[13], responseTimes[14], responseTimes[15],
             chapter1ResponseTime,
-            responseTimes[16], responseTimes[17], responseTimes[18], responseTimes[19], 
-            responseTimes[20], 
-            chapter2ResponseTime,
-            results[21], results[22], results[23], results[24], results[25],  
-            results[26], results[27], results[28], results[29], results[30],
-            chapter3Score,
-            responseTimes[21], responseTimes[22], responseTimes[23], responseTimes[24], 
-            responseTimes[25], responseTimes[26], responseTimes[27], responseTimes[28], 
-            responseTimes[29], responseTimes[30],
-            chapter3ResponseTime);
+            responseTimes[8], responseTimes[9], responseTimes[10], responseTimes[11],
+            responseTimes[12],
+            chapter2ResponseTime);
     }
 
     void WriteData(string collectorName, string appStartDay, string childName, string birthday, string gender, string motherEducation,
         string fatherEducation, string siblingCount, string location, string locationDetail, string getEducationBefore,
         string preEducationTime, string appStartTime, string appEndTime, double fullSessionTime, int completeScore,
-        int q1Score, int q2Score, int q3Score, int q4Score, int q5Score, int q6Score, int q7Score, int q8Score, int q9Score,
-        int q10Score, int q11Score, int q12Score, int q13Score, int q14Score, int q15Score, int q16Score,
-         int chapter1Score,
-        int q25Score, int q26Score, int q27Score, int q29Score, int q30Score, int chapter2Score,
+        int q1Score, int q2Score, int q3Score, int q4Score, int q5Score, int q6Score, int q7Score, int chapter1Score,
+        int q8Score, int q9Score, int q10Score, int q11Score, int q12Score, int q13Score, int chapter2Score,
         double q1responseTime, double q2responseTime, double q3responseTime, double q4responseTime, double q5responseTime, 
-        double q6responseTime, double q7responseTime, double q8responseTime, double q9responseTime, double q10responseTime, 
-        double q11responseTime, double q12responseTime, double q13responseTime, double q14responseTime,
-        double q15responseTime, double q16responseTime, 
-        double chapter1responseTime, double q25responseTime, double q26responseTime, double q27responseTime,
-        double q29responseTime, double q30responseTime, double chapter2responseTime,
-        int q31Score, int q32Score, int q34Score, int q35Score, int q36Score, int q37Score, int q38Score, 
-        int q40Score, int q41Score, int q42Score, int chapter3Score, double q31responseTime, double q32responseTime, 
-        double q34responseTime, double q35responseTime, double q36responseTime,  double q37responseTime, 
-        double q38responseTime, double q40responseTime, double q41responseTime, double q42responseTime,
-        double chapter3responseTime)
+        double q6responseTime, double q7responseTime, double q8responseTime, double chapter1responseTime,
+        double q9responseTime, double q10responseTime, double q11responseTime, double q12responseTime, double q13responseTime, 
+        double chapter2responseTime)
     {
         var userData = new Dictionary<string, object>
         {
@@ -515,33 +485,32 @@ public class QuizManager : MonoBehaviour
             { "B1_DahaÖnceOkulÖncesiEğitimiAlmaSüresi", preEducationTime }, { "B2_UygulamaBaşlamaZamanı", appStartTime },
             { "B3_UygulamaBitişZamanı", appEndTime }, { "B4_ToplamOturumSüresi", fullSessionTime },
             { "B5_TESTİNTAMAMINDANALINANTOPLAMPUAN", completeScore },
+            
+            // Bölüm1 puan
             { "B6_1SorununPuanı", q1Score }, { "B7_2SorununPuanı", q2Score }, { "B8_3SorununPuanı", q3Score }, { "B9_4SorununPuanı", q4Score },
-            { "C0_5SorununPuanı", q5Score }, { "C1_6SorununPuanı", q6Score }, { "C2_7SorununPuanı", q7Score }, { "C3_8SorununPuanı", q8Score },
-            { "C4_9SorununPuanı", q9Score }, { "C5_10SorununPuanı", q10Score }, { "C6_11SorununPuanı", q11Score }, { "C7_12SorununPuanı", q12Score },
-            { "C8_13SorununPuanı", q13Score }, { "C9_14SorununPuanı", q14Score }, { "D0_15SorununPuanı", q15Score }, { "D1_16SorununPuanı", q16Score },
-            { "E0_1BÖLÜMTOPLAMPUANI", chapter1Score },
-            { "E1_1SorununTepkiSüresi", q1responseTime }, { "E2_2SorununTepkiSüresi", q2responseTime }, { "E3_3SorununTepkiSüresi", q3responseTime },
-            { "E4_4SorununTepkiSüresi", q4responseTime }, { "E5_5SorununTepkiSüresi", q5responseTime }, { "E6_6SorununTepkiSüresi", q6responseTime },
-            { "E7_7SorununTepkiSüresi", q7responseTime }, { "E8_8SorununTepkiSüresi", q8responseTime }, { "E9_9SorununTepkiSüresi", q9responseTime },
-            { "F0_10SorununTepkiSüresi", q10responseTime }, { "F1_11SorununTepkiSüresi", q11responseTime }, { "F2_12SorununTepkiSüresi", q12responseTime },
-            { "F3_13SorununTepkiSüresi", q13responseTime }, { "F4_14SorununTepkiSüresi", q14responseTime }, { "F5_15SorununTepkiSüresi", q15responseTime },
-            { "F6_16SorununTepkiSüresi", q16responseTime }, 
-            { "G5_1BÖLÜMTOPLAMTEPKİSÜRESİ", chapter1responseTime },
-            { "G6_25SorununPuanı", q25Score }, { "G7_26SorununPuanı", q26Score }, { "G8_27SorununPuanı", q27Score },
-            { "H0_29SorununPuanı", q29Score }, { "H1_30SorununPuanı", q30Score },
-            { "H2_2BÖLÜMTOPLAMPUANI", chapter2Score },
-            { "H3_25SorununTepkiSüresi", q25responseTime }, { "H4_26SorununTepkiSüresi", q26responseTime }, { "H5_27SorununTepkiSüresi", q27responseTime },
-            { "H7_29SorununTepkiSüresi", q29responseTime }, { "H8_30SorununTepkiSüresi", q30responseTime },
-            { "H9_2BÖLÜMTOPLAMTEPKİSÜRESİ", chapter2responseTime },
-            { "I0_31SorununPuanı", q31Score }, { "I1_32SorununPuanı", q32Score }, { "I3_34SorununPuanı", q34Score },
-            { "I4_35SorununPuanı", q35Score }, { "I5_36SorununPuanı", q36Score }, { "I6_37SorununPuanı", q37Score }, { "I7_38SorununPuanı", q38Score },
-             { "I9_40SorununPuanı", q40Score }, { "J0_41SorununPuanı", q41Score }, { "J1_42SorununPuanı", q42Score },
-            { "J2_3BÖLÜMTOPLAMPUANI", chapter3Score },
-            { "J3_31SorununTepkiSüresi", q31responseTime }, { "J4_32SorununTepkiSüresi", q32responseTime }, 
-            { "J6_34SorununTepkiSüresi", q34responseTime }, { "J7_35SorununTepkiSüresi", q35responseTime }, { "J8_36SorununTepkiSüresi", q36responseTime },
-            { "J9_37SorununTepkiSüresi", q37responseTime }, { "K0_38SorununTepkiSüresi", q38responseTime }, 
-            { "K2_40SorununTepkiSüresi", q40responseTime }, { "K3_41SorununTepkiSüresi", q41responseTime }, { "K4_42SorununTepkiSüresi", q42responseTime },
-            { "K5_3BÖLÜMTOPLAMTEPKİSÜRESİ", chapter3responseTime }
+            { "C0_5SorununPuanı", q5Score }, { "C1_6SorununPuanı", q6Score }, { "C2_7SorununPuanı", q7Score },
+            
+            { "C3_1BÖLÜMTOPLAMPUANI", chapter1Score },
+            
+            // Bölüm1 süre
+            { "C4_1SorununTepkiSüresi", q1responseTime }, { "C5_2SorununTepkiSüresi", q2responseTime }, { "C6_3SorununTepkiSüresi", q3responseTime },
+            { "C7_4SorununTepkiSüresi", q4responseTime }, { "C8_5SorununTepkiSüresi", q5responseTime }, { "C9_6SorununTepkiSüresi", q6responseTime },
+            { "D0_7SorununTepkiSüresi", q7responseTime },
+            
+            { "D1_1BÖLÜMTOPLAMTEPKİSÜRESİ", chapter1responseTime },
+
+            // Bölüm2 puan
+            { "D2_8SorununPuanı", q8Score }, { "D3_9SorununPuanı", q9Score }, { "D4_10SorununPuanı", q10Score }, { "D5_11SorununPuanı", q11Score },
+            { "D6_12SorununPuanı", q12Score }, { "D7_13SorununPuanı", q13Score }, 
+            
+            { "D8_2BÖLÜMTOPLAMPUANI", chapter2Score },
+            
+            // Bölüm2 süre
+            { "D9_8SorununTepkiSüresi", q8responseTime }, { "E0_9SorununTepkiSüresi", q9responseTime }, { "E1_10SorununTepkiSüresi", q10responseTime },
+            { "E2_11SorununTepkiSüresi", q11responseTime }, { "E3_12SorununTepkiSüresi", q12responseTime },
+            { "E4_13SorununTepkiSüresi", q13responseTime }, 
+            
+            { "E5_2BÖLÜMTOPLAMTEPKİSÜRESİ", chapter2responseTime }
         };
 
         databaseReference
