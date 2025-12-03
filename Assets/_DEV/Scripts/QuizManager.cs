@@ -226,15 +226,6 @@ public class QuizManager : MonoBehaviour
         questionPanels[index].panel.SetActive(true);
         currentPanelIndex = index;
         
-        // if (questionPanels[index].chapterNo == 2)
-        // {
-        //     foreach (var button in questionPanels[index].allButtons)
-        //     {
-        //         // button.gameObject.SetActive(false);
-        //         // button.onClick.RemoveAllListeners();
-        //         // button.onClick.AddListener(() => OnButtonClicked(button));
-        //     }
-        // }
         if (questionPanels[index].chapterNo == 4) //iki sesli sorular için, chapter değil
         {
             foreach (var button in questionPanels[index].allButtons)
@@ -265,11 +256,7 @@ public class QuizManager : MonoBehaviour
             audioSource.clip = questionPanels[index].questionAudio;
             audioSource.Play();
             
-            // if (questionPanels[index].chapterNo == 2)
-            // {
-            //     StartCoroutine(EnableButtonsAfterAudio(questionPanels[index].allButtons, audioSource.clip.length));
-            // }
-            if (questionPanels[index].chapterNo == 4)
+            if (questionPanels[index].chapterNo == 4) //iki sesli sorular için, chapter değil
             {
                 StartCoroutine(PlayAudioAndEnableButtonsWithSecondAudio(
                     questionPanels[index].questionAudio,
@@ -417,30 +404,6 @@ public class QuizManager : MonoBehaviour
         Debug.Log("elapsedTime:" + elapsedTime);
         Debug.Log("TotalMilliseconds:" + elapsedTime.TotalMilliseconds);
 
-        var chapter1Score = 0;
-        for (int i = 0; i < 7; i++)
-        {
-            chapter1Score += results[i];
-        }
-
-        var chapter1ResponseTime = 0.0;
-        for (int i = 0; i < 7; i++)
-        {
-            chapter1ResponseTime += responseTimes[i];
-        }
-        
-        var chapter2Score = 0;
-        for (int i = 7; i < 13; i++)
-        {
-            chapter2Score += results[i];
-        }
-
-        var chapter2ResponseTime = 0.0;
-        for (int i = 7; i < 13; i++)
-        {
-            chapter2ResponseTime += responseTimes[i];
-        }
-
         var completeTime = 0.0;
         for (int i = 0; i < 12; i++)
         {
@@ -452,29 +415,23 @@ public class QuizManager : MonoBehaviour
         WriteData(collectorName, appStartDay, childName, birthday, gender, motherEducation, fatherEducation,
             siblingCount, location,
             locationDetail, getEducationBefore, preEducationTime, appStartTime, appEndTime, fullSessionTime,
-            completeScore,
             results[0], results[1], results[2], results[3], results[4], results[5],
-            results[6], 
-            chapter1Score,
-            results[7], results[8], results[9], results[10], results[11], results[12],
-            chapter2Score,
+            results[6], results[7], results[8], results[9], results[10], results[11], 
+            results[12],completeScore,
             responseTimes[0], responseTimes[1], responseTimes[2], responseTimes[3],
             responseTimes[4], responseTimes[5], responseTimes[6], responseTimes[7],
-            chapter1ResponseTime,
             responseTimes[8], responseTimes[9], responseTimes[10], responseTimes[11],
-            responseTimes[12],
-            chapter2ResponseTime);
+            responseTimes[12]);
     }
 
     void WriteData(string collectorName, string appStartDay, string childName, string birthday, string gender, string motherEducation,
         string fatherEducation, string siblingCount, string location, string locationDetail, string getEducationBefore,
-        string preEducationTime, string appStartTime, string appEndTime, double fullSessionTime, int completeScore,
-        int q1Score, int q2Score, int q3Score, int q4Score, int q5Score, int q6Score, int q7Score, int chapter1Score,
-        int q8Score, int q9Score, int q10Score, int q11Score, int q12Score, int q13Score, int chapter2Score,
+        string preEducationTime, string appStartTime, string appEndTime, double fullSessionTime,
+        int q1Score, int q2Score, int q3Score, int q4Score, int q5Score, int q6Score, int q7Score,
+        int q8Score, int q9Score, int q10Score, int q11Score, int q12Score, int q13Score, int completeScore,
         double q1responseTime, double q2responseTime, double q3responseTime, double q4responseTime, double q5responseTime, 
-        double q6responseTime, double q7responseTime, double q8responseTime, double chapter1responseTime,
-        double q9responseTime, double q10responseTime, double q11responseTime, double q12responseTime, double q13responseTime, 
-        double chapter2responseTime)
+        double q6responseTime, double q7responseTime, double q8responseTime, double q9responseTime, double q10responseTime,
+        double q11responseTime, double q12responseTime, double q13responseTime)
     {
         var userData = new Dictionary<string, object>
         {
@@ -484,33 +441,19 @@ public class QuizManager : MonoBehaviour
             { "A9_ÇocuğunYaşadığıİlİlçeKöy", locationDetail }, { "B0_DahaÖnceOkulÖncesiEğitimiAldımı", getEducationBefore },
             { "B1_DahaÖnceOkulÖncesiEğitimiAlmaSüresi", preEducationTime }, { "B2_UygulamaBaşlamaZamanı", appStartTime },
             { "B3_UygulamaBitişZamanı", appEndTime }, { "B4_ToplamOturumSüresi", fullSessionTime },
-            { "B5_TESTİNTAMAMINDANALINANTOPLAMPUAN", completeScore },
             
-            // Bölüm1 puan
-            { "B6_1SorununPuanı", q1Score }, { "B7_2SorununPuanı", q2Score }, { "B8_3SorununPuanı", q3Score }, { "B9_4SorununPuanı", q4Score },
-            { "C0_5SorununPuanı", q5Score }, { "C1_6SorununPuanı", q6Score }, { "C2_7SorununPuanı", q7Score },
+            { "B5_1SorununPuanı", q1Score }, { "B6_2SorununPuanı", q2Score }, { "B7_3SorununPuanı", q3Score }, { "B8_4SorununPuanı", q4Score },
+            { "B9_5SorununPuanı", q5Score }, { "C0_6SorununPuanı", q6Score }, { "C1_7SorununPuanı", q7Score }, { "C2_8SorununPuanı", q8Score },
+            { "C3_9SorununPuanı", q9Score }, { "C4_10SorununPuanı", q10Score }, { "C5_11SorununPuanı", q11Score }, { "C6_12SorununPuanı", q12Score }, 
+            { "C7_13SorununPuanı", q13Score },
             
-            { "C3_1BÖLÜMTOPLAMPUANI", chapter1Score },
+            { "C8_TESTİNTAMAMINDANALINANTOPLAMPUAN", completeScore },
             
-            // Bölüm1 süre
-            { "C4_1SorununTepkiSüresi", q1responseTime }, { "C5_2SorununTepkiSüresi", q2responseTime }, { "C6_3SorununTepkiSüresi", q3responseTime },
-            { "C7_4SorununTepkiSüresi", q4responseTime }, { "C8_5SorununTepkiSüresi", q5responseTime }, { "C9_6SorununTepkiSüresi", q6responseTime },
-            { "D0_7SorununTepkiSüresi", q7responseTime },
-            
-            { "D1_1BÖLÜMTOPLAMTEPKİSÜRESİ", chapter1responseTime },
-
-            // Bölüm2 puan
-            { "D2_8SorununPuanı", q8Score }, { "D3_9SorununPuanı", q9Score }, { "D4_10SorununPuanı", q10Score }, { "D5_11SorununPuanı", q11Score },
-            { "D6_12SorununPuanı", q12Score }, { "D7_13SorununPuanı", q13Score }, 
-            
-            { "D8_2BÖLÜMTOPLAMPUANI", chapter2Score },
-            
-            // Bölüm2 süre
-            { "D9_8SorununTepkiSüresi", q8responseTime }, { "E0_9SorununTepkiSüresi", q9responseTime }, { "E1_10SorununTepkiSüresi", q10responseTime },
-            { "E2_11SorununTepkiSüresi", q11responseTime }, { "E3_12SorununTepkiSüresi", q12responseTime },
-            { "E4_13SorununTepkiSüresi", q13responseTime }, 
-            
-            { "E5_2BÖLÜMTOPLAMTEPKİSÜRESİ", chapter2responseTime }
+            { "C9_1SorununTepkiSüresi", q1responseTime }, { "D0_2SorununTepkiSüresi", q2responseTime }, { "D1_3SorununTepkiSüresi", q3responseTime },
+            { "D2_4SorununTepkiSüresi", q4responseTime }, { "D3_5SorununTepkiSüresi", q5responseTime }, { "D4_6SorununTepkiSüresi", q6responseTime },
+            { "D5_7SorununTepkiSüresi", q7responseTime }, { "D6_8SorununTepkiSüresi", q8responseTime }, { "D7_9SorununTepkiSüresi", q9responseTime }, 
+            { "D8_10SorununTepkiSüresi", q10responseTime }, { "D9_11SorununTepkiSüresi", q11responseTime }, { "E0_12SorununTepkiSüresi", q12responseTime },
+            { "E1_13SorununTepkiSüresi", q13responseTime }
         };
 
         databaseReference
